@@ -1,4 +1,4 @@
-# aaj-pw
+# AAJExpress
 
 ## Project setup
 ```

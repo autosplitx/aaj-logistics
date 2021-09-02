@@ -63,7 +63,7 @@ export default {};
 }
 
 .aside-left {
-  margin-top: 1.5em;
+  margin-top: 4rem;
 }
 
 .aside-right {

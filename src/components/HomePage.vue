@@ -63,17 +63,17 @@ export default {
 @media (min-width: 320px) {
   /* smartphones, iPhone, portrait 480x320 phones */
   .home-page {
-    background-position: right 73%;
+    background-position: right 83%;
   }
 }
 @media (min-width: 360px) {
   .home-page {
-    background-position: right 74%;
+    background-position: right 84%;
   }
 }
 @media (min-width: 375px) {
   .home-page {
-    background-position: right 70%;
+    background-position: right 82%;
   }
 }
 @media (min-width: 481px) {
@@ -82,7 +82,7 @@ export default {
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   .home-page {
-    background-position: right 20%;
+    background-position: right 30%;
     background-size: 60%;
   }
 }

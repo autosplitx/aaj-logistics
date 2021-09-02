@@ -65,46 +65,41 @@ export default {};
 </script>
 
 <style scoped>
-.provider h2 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--color-blue-darkest);
-}
 .provider {
-  background-color: var(--color-blue-darkest);
+  padding: 0 0.8rem;
+  background-color: var(--aaj-blue-h1);
 }
 .provider-heading {
-  margin: 6rem 0 3rem;
+  margin: 3rem 0;
 }
 .provider h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
   color: #fff;
 }
 .provider h3 {
   font-size: 1.2rem;
-  font-weight: 700;
-  opacity: 0.6;
+  font-weight: 500;
+  margin: 1rem 0;
+  color: var(--aaj-blue-h10);
 }
 .grid-3 {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
 }
 .provider .grid h5 {
   margin-bottom: 1rem;
   text-transform: uppercase;
+  color: var(--aaj-gray-light);
+  font-weight: 500;
 }
 .grid-3 .hoverable {
   height: 250px;
   padding: 1rem;
   background-color: var(--color-blue-light);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   transition: background 0.2s ease-out;
 }
 .grid-3 .hoverable:hover {
-  background: var(--primary-color);
-}
-.grid-3 .hoverable:hover > h5 {
-  color: var(--color-gray-default);
+  background: var(--aaj-orange-red);
 }
 .grid-3 p {
   color: #fff;
@@ -113,28 +108,64 @@ export default {};
   padding-bottom: 3rem;
 }
 
-@media (max-width: 641px) {
-  .provider {
-    padding: 0 0.8rem;
-  }
+@media (min-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+}
+
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width: 641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   .provider h2 {
+    font-size: 1.2rem;
     font-weight: 600;
   }
-  .provider-heading {
-    margin: 3rem 0 2rem;
-  }
+
   .provider h3 {
-    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
   }
   .grid-3 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
-  .grid-3 .hoverable {
-    height: 200px;
+  .provider .grid h5 {
+    font-size: 0.76rem;
   }
 }
 
 @media (min-width: 961px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  /* tablet, landscape iPad, lo-res laptops and desktops */
+}
+
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .provider-heading {
+    margin: 6rem 0 3rem;
+  }
+  .provider h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  .provider h3 {
+    font-size: 1.2rem;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .grid-3 .hoverable {
+    height: 250px;
+    padding: 1rem;
+  }
+  .pb {
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
 </style>

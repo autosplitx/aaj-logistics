@@ -1,9 +1,9 @@
 <template>
   <section class="container">
-    <div class="grid">
+    <div class="hero">
       <aside class="aside-left container">
-        <div>
-          <h1>Deliveries for e-commerce and social commerce sellers</h1>
+        <div class="hero-text">
+          <h2>Deliveries for e-commerce and social commerce sellers</h2>
           <h3>
             We help you with local and international deliveries to your
             customers anywhere in the world.
@@ -11,11 +11,13 @@
         </div>
 
         <div class="account">
-          <button class="btn btn-prinary">Create an account</button>
-          <button class="btn btn-prinary">Sign in</button>
+          <a href="#" class="btn btn-prinary">Create an account</a>
+          <a href="#" class="btn btn-prinary">Sign in</a>
         </div>
       </aside>
-      <aside class="aside-right"></aside>
+      <aside class="aside-right">
+        <img src="/img/aaj/aaj_deliveries.svg" alt="AAJ Deliveries" />
+      </aside>
     </div>
   </section>
 </template>
@@ -25,76 +27,169 @@ export default {};
 </script>
 
 <style scoped>
-.grid {
-  grid-template-columns: 4fr 3fr;
-}
-.aside-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  /* padding-left: 8rem; */
-  margin-top: 50px;
-  height: 80vh;
-}
-.aside-left h1 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--color-blue-darkest);
-}
-.aside-left h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-blue-darkest);
-  opacity: 0.6;
-  margin-top: 0.8rem;
-}
-.account .btn {
-  padding: 1.2em 1em;
-  margin-right: 1rem;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-.account .btn:nth-child(1) {
-  background: var(--color-blue-darkest);
-}
-.aside-right {
-  display: flex;
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  /* background-color: hsl(25, 100%, 90%); */
+  padding: 0.5rem;
+  gap: 10px;
 }
 
-@media (max-width: 641px) {
-  .container {
-    padding: 0.5rem;
+.hero-text h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--aaj-blue-h1);
+}
+
+.hero-text h3 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--aaj-gray-dark);
+  margin: 1rem 0;
+}
+
+.account .btn {
+  padding: 0.6rem 1rem;
+  margin: 0.5rem 1rem 0.5rem 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.account .btn:nth-child(1) {
+  background: var(--aaj-blue-h1);
+}
+
+.aside-right {
+  margin-top: 4rem;
+}
+
+.aside-right img {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+  .hero-text h2 {
+    font-size: 2.1rem;
   }
-  .grid {
-    grid-template-columns: 1fr;
+
+  .hero-text h3 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
   }
-  .aside-left {
-    margin-top: 0;
-    height: auto;
+}
+@media (min-width: 360px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+  .hero-text h2 {
+    font-size: 2.3rem;
   }
-  .aside-left h1 {
-    font-size: 1.8rem;
+
+  .hero-text h3 {
+    margin: 1.8rem 0;
+  }
+}
+@media (min-width: 375px) {
+  .hero-text h2 {
+    font-size: 2.5rem;
+  }
+
+  .hero-text h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .account .btn {
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 1rem 0.8rem 0;
+  }
+}
+@media (min-width: 411px) {
+  .hero-text h2 {
+    font-size: 2.7rem;
+  }
+
+  .hero-text h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .account .btn {
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 1rem 0.8rem 0;
+  }
+}
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+@media (min-width: 641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .hero {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+  }
+
+  .hero-text h2 {
+    font-size: 2.2rem;
     font-weight: 700;
   }
-  .aside-left :where(h3, .btn) {
-    font-size: 1rem;
-    font-weight: 500 !important;
-    margin-top: 1.5rem;
+
+  .hero-text h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 1.5rem 0;
+  }
+
+  .account .btn {
+    padding: 0.6rem 1rem;
+    font-size: 1em;
+  }
+
+  .aside-right {
+    display: none;
+  }
+}
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+@media (min-width: 1025px) {
+  .hero {
+    grid-template-columns: 5fr 3fr;
+    padding: 0;
+  }
+  .aside-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    height: 80vh;
+    overflow: hidden;
+  }
+  .hero-text h2 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--aaj-blue-h1);
+  }
+  .hero-text h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 1rem 0 2rem;
   }
   .account .btn {
-    padding: 1em;
+    padding: 0.8em 1em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 3rem;
   }
   .aside-right {
     display: none;
   }
 }
-
-@media (min-width: 961px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
 </style>

@@ -70,7 +70,7 @@
 
     <div class="a-container">
       <h4 class="a-btn">
-        Do I need to pay for marketing my products listed on the platform??
+        Do I need to pay for marketing my products listed on the platform?
         <span></span>
       </h4>
       <div class="a-panel">
@@ -89,18 +89,17 @@ export default {};
 
 <style scoped>
 .accordion .a-container .a-panel {
-  /* width: 100%; */
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   opacity: 0;
   height: auto;
   max-height: 0;
   overflow: hidden;
-  padding: 0 10px;
+  padding: 0 1.5rem;
 }
 
 .accordion .a-container.active .a-panel {
-  padding: 1rem 0.6rem 0.6rem;
+  padding: 1rem 1.5rem 0.6rem;
   opacity: 1;
   height: auto;
   max-height: 500px;
@@ -113,13 +112,15 @@ export default {};
 .a-btn {
   position: relative;
   padding: 0.8rem 1.5rem;
-  width: 100%;
+  width: 95%;
+  margin: auto;
   display: block;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border-radius: 10px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.15),
+    0 5px 5px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .a-btn span {
@@ -151,14 +152,34 @@ export default {};
   transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 641px) {
+@media (min-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+}
+
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width: 641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   .a-btn,
   .a-panel p {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }
 
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width: 1025px) {
+/* big landscape tablets, laptops, and desktops */
+  .a-btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
 </style>

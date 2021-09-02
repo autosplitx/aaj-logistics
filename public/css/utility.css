@@ -12,13 +12,34 @@
   --secondary-color: #6c757d;
   --dark-color: #292b2c;
   --light-color: #d9d9d9;
-  --success-color: #5cb85c;
-  --info-color: #5bc0de;
-  --danger-color: #d9534f;
-  --error-color: #ff165e;
-  --warning-color: #f0ad4e;
-  font-family: 'Poppins', sans-serif;
-  ;
+
+  --aaj-gray-default: #a4aaad;
+  --aaj-gray-darkest: hsl(198, 18%, 8%);
+  --aaj-gray-darker: hsl(210, 25%, 40%);
+  --aaj-gray-dark: #646e73;
+  --aaj-gray-light: #d7f1fc;
+
+  --aaj-primary: #da532cff;
+  --aaj-orange-red: #fc642dff;
+  --aaj-yellow: #ffe400ff;
+  --aaj-yellow-green: #86c228ff;
+  --aaj-blue: #163476ff;
+
+  --aaj-primary-h: hsla(13, 70%, 51%, 1);
+  --aaj-orange-red-h: hsla(16, 97%, 58%, 1);
+  --aaj-yellow-h: hsla(54, 100%, 50%, 1);
+  --aaj-yellow-green-h: hsla(83, 66%, 46%, 1);
+  --aaj-blue-h: hsla(221, 69%, 27%, 1);
+
+  --aaj-primary-h1: hsla(13, 70%, 51%, 1);
+  --aaj-orange-red-h1: hsla(16, 97%, 58%, 1);
+  --aaj-yellow-h1: hsla(54, 100%, 50%, 1);
+  --aaj-yellow-green-h1: hsla(83, 66%, 46%, 1);
+  --aaj-blue-h1: hsla(221, 69%, 17%, 1);
+
+  --aaj-primary-h10: hsla(13, 70%, 70%, 1);
+  --aaj-blue-h10: hsla(221, 69%, 70%, 1);
+
 }
 
 @media (min-width:320px) {
@@ -92,7 +113,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--primary-color);
+  color: var(--aaj-primary);
   font-weight: 500;
 }
 
@@ -114,7 +135,9 @@ h4 {
 }
 
 .divider {
-  border: 1px solid var(--light-color);
+  border-bottom: 1px solid hsl(0, 0%, 95%);
+  width: 270px;
+  height: 2px;
 }
 
 .text-danger {
@@ -134,7 +157,7 @@ h4 {
 }
 
 .container {
-  max-width: 1024px;
+  max-width: 1140px;
   margin: 0 auto;
   overflow: auto;
   /* background-color: #fff; */
@@ -176,7 +199,7 @@ h4 {
   display: inline-block;
   padding: 10px 30px;
   cursor: pointer;
-  background-color: var(--primary-color);
+  background-color: var(--aaj-primary);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -195,7 +218,7 @@ h4 {
 /* Backgrounds % colored buttons */
 .bg-primary,
 .btn-primary {
-  background-color: var(--primary-color);
+  background-color: var(--aaj-primary);
   color: #fff;
 }
 

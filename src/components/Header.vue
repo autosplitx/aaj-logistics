@@ -1,11 +1,13 @@
 <template>
   <header class="top-head">
-    <nav class="nav container">
-      <div class="logo">
-        <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
-      </div>
-      <div class="login"><a href="#">Sign in</a></div>
-    </nav>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
+        </div>
+        <div class="login"><a href="#">Sign in</a></div>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -15,7 +17,7 @@ export default {};
 
 <style scoped>
 .top-head {
-  padding: 1rem 0;
+  padding: 1rem 0.8rem;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -23,27 +25,25 @@ export default {};
 }
 .scrolling-active {
   background: #fff;
-  color: var(--primary-color);
+  color: var(--aaj-primary);
   box-shadow: 0 3px 1rem rgba(0, 0, 0, 0.1);
 }
 .nav {
   display: flex;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
 }
-.nav img {
+.logo img {
   display: block;
   width: 80px;
 }
 .login a {
   display: block;
-  width: 100%;
-  height: 100%;
   padding: 0.5rem 1rem;
-  background: var(--primary-color);
+  background: var(--aaj-primary);
   color: #fff;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   transition: background 0.3s ease;
 }
@@ -51,16 +51,42 @@ export default {};
   background: hsl(25, 100%, 35%);
 }
 
-@media (max-width: 641px) {
+@media (min-width: 320px) {
+  /*  */
+}
+@media (min-width: 481px) {
+  /*  */
+}
+@media (min-width: 641px) {
+  /*  */
   .top-head {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.8rem;
   }
-  .nav.container {
-    padding: 0 0.5rem;
+  .logo img {
+    width: 100px;
+  }
+  .login a {
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
   }
 }
-
 @media (min-width: 961px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  /*  */
+}
+@media (min-width: 1025px) {
+  .top-head {
+    padding: 0.8rem 0;
+  }
+  .logo img {
+    width: 100px;
+  }
+  .login a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+@media (min-width: 1281px) {
+  /*  */
 }
 </style>

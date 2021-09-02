@@ -52,26 +52,51 @@ export default {
   background-color: #fff;
 }
 .home-page {
+  position: relative;
   background-image: url("/img/aaj/aaj_deliveries.svg");
   background-attachment: fixed;
-  background-position: right;
+  background-position: right 83%;
   background-repeat: no-repeat;
-  background-size: 50%;
+  background-size: 20%;
 }
 
 @media (min-width: 320px) {
   /* smartphones, iPhone, portrait 480x320 phones */
+  .home-page {
+    background-position: right 73%;
+  }
 }
-
+@media (min-width: 360px) {
+  .home-page {
+    background-position: right 74%;
+  }
+}
+@media (min-width: 375px) {
+  .home-page {
+    background-position: right 70%;
+  }
+}
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 }
-
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .home-page {
+    background-position: right 20%;
+    background-size: 60%;
+  }
 }
-
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .home-page {
+    background-position: right;
+    background-size: 45%;
+  }
+}
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
 </style>

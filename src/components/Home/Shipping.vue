@@ -7,8 +7,7 @@
       </h2>
       <h3>
         Request a pickup or delivery from you or from the seller and we'll get
-        it <br />
-        delivered to where you need it to go.
+        it delivered to where you need it to go.
       </h3>
     </div>
   </div>
@@ -20,52 +19,86 @@ export default {};
 
 <style scoped>
 .shipping {
-  padding: 5rem 0;
+  padding: 0.5rem;
   background-color: #fff;
 }
 .shipping h2 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--color-blue-darkest);
-}
-.shipping h2 {
-  color: var(--color-blue-darkest);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--aaj-blue-h1);
 }
 .shipping h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-blue-darkest);
-  opacity: 0.6;
+  font-size: 1.16rem;
+  font-weight: 300;
+  color: var(--aaj-gray-dark);
   margin-top: 0.8rem;
 }
 .shipping h4 {
   font-size: 0.8rem;
   text-transform: uppercase;
-  font-weight: 900;
-  color: var(--primary-color);
+  font-weight: 700;
+  color: var(--aaj-primary);
 }
 
-@media (max-width: 641px) {
+@media (min-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+}
+
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width: 641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   .shipping {
-    padding: 2rem 0.8rem;
-  }
-  .my-5 {
-    margin: 0;
+    padding: 0.5rem;
   }
   .shipping h2 {
+    font-size: 1.5rem;
     font-weight: 600;
+    color: var(--aaj-blue-h1);
   }
   .shipping h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-top: 0;
+    font-size: 1.2rem;
   }
   .shipping h4 {
-    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--aaj-primary);
   }
 }
 
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .shipping {
+    padding: 3rem 0;
+    background-color: #fff;
+  }
+  .shipping h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  .shipping h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--aaj-blue-h1);
+  }
+  .shipping h3 {
+    width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
 </style>

@@ -45,7 +45,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js"
 );
 
-importScripts("/precache-manifest.05ea36697ece00f85a794295060de260.js");
+importScripts("/precache-manifest.c73669202ee46cfaf156df6fe14d89a7.js");
 
 workbox.core.setCacheNameDetails({ prefix: "aaj-express" });
 

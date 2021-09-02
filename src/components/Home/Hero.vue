@@ -62,6 +62,10 @@ export default {};
   background: var(--aaj-blue-h1);
 }
 
+.aside-left {
+  margin-top: 1.5em;
+}
+
 .aside-right {
   margin-top: 4rem;
 }

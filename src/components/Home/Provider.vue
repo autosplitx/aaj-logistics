@@ -133,6 +133,9 @@ export default {};
   .provider .grid h5 {
     font-size: 0.76rem;
   }
+  .grid-3 .hoverable {
+    height: 280px;
+  }
 }
 
 @media (min-width: 961px) {
@@ -158,7 +161,6 @@ export default {};
   }
   .grid-3 .hoverable {
     height: 250px;
-    padding: 1rem;
   }
   .pb {
     padding-bottom: 6rem;

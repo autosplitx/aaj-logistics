@@ -54,7 +54,7 @@ export default {};
     padding: 0.5rem;
   }
   .shipping h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: var(--aaj-blue-h1);
   }

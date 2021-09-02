@@ -30,7 +30,7 @@ export default {};
 }
 .footer :where(h1, p, a) {
   font-size: 0.8rem;
-  color: var(--aaj-blue-h10);
+  color: #fff;
   letter-spacing: 1.5px;
   line-height: 1.5;
 }

@@ -26,11 +26,11 @@ export default {};
 .footer {
   padding: 3rem 0;
   text-align: right;
-  background: var(--color-blue-darkest);
+  background: var(--aaj-blue-h);
 }
 .footer :where(h1, p, a) {
   font-size: 0.8rem;
-  color: hsl(0, 0%, 70%);
+  color: var(--aaj-blue-h10);
   letter-spacing: 1.5px;
   line-height: 1.5;
 }

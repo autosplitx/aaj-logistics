@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import About from "../views/About.vue";
+import Registration from "../views/Registration.vue";
 
 const routes = [
   {
@@ -19,34 +19,75 @@ const routes = [
           content: "The home page of AAJExpress.",
         },
       ],
+      progress: {
+        func: [
+          { call: "color", modifier: "temp", argument: "#86c228ff" },
+          { call: "fail", modifier: "temp", argument: "#6e0000" },
+          { call: "location", modifier: "temp", argument: "top" },
+          {
+            call: "transition",
+            modifier: "temp",
+            argument: { speed: "1.5s", opacity: "0.6s", termination: 400 },
+          },
+        ],
+      },
     },
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/registration",
+    name: "Registration",
+    component: Registration,
     meta: {
-      title: "About | AAJExpress",
+      title: "Registration | AAJExpress",
       metaTags: [
         {
           name: "description",
-          content: "The about page of AAJExpress.",
+          content: "The registration page of AAJExpress.",
         },
         {
           property: "og:description",
-          content: "The about page of AAJExpress.",
+          content: "The registration page of AAJExpress.",
         },
       ],
     },
   },
   // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
+  //   path: "/registration",
+  //   name: "Registration",
   //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  //     import(/* webpackChunkName: "registration" */ "../views/Registration.vue"),
+  //   meta: {
+  //     title: "Registration | AAJExpress",
+  //     metaTags: [
+  //       {
+  //         name: "description",
+  //         content: "The registration page of AAJExpress.",
+  //       },
+  //       {
+  //         property: "og:description",
+  //         content: "The registration page of AAJExpress.",
+  //       },
+  //     ],
+  //   },
+  // },
+  // {
+  //   path: "/signup",
+  //   name: "Signup",
+  //   component: () =>
+  //     import(/* webpackChunkName: "signup" */ "../views/Signup.vue"),
+  //   meta: {
+  //     title: "Signup | AAJExpress",
+  //     metaTags: [
+  //       {
+  //         name: "description",
+  //         content: "The signup page of AAJExpress.",
+  //       },
+  //       {
+  //         property: "og:description",
+  //         content: "The signup page of AAJExpress.",
+  //       },
+  //     ],
+  //   },
   // },
 ];
 

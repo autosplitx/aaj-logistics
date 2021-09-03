@@ -173,7 +173,7 @@ export default {};
 }
 
 @media (min-width: 1025px) {
-/* big landscape tablets, laptops, and desktops */
+  /* big landscape tablets, laptops, and desktops */
   .a-btn {
     width: 100%;
   }

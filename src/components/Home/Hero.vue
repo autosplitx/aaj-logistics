@@ -11,8 +11,12 @@
         </div>
 
         <div class="account">
-          <a href="#" class="btn btn-prinary">Create an account</a>
-          <a href="#" class="btn btn-prinary">Sign in</a>
+          <router-link :to="{ name: 'Registration' }" class="btn btn-prinary"
+            >Create an account</router-link
+          >
+          <router-link :to="{ name: 'Registration' }" class="btn btn-prinary"
+            >Sign in</router-link
+          >
         </div>
       </aside>
       <aside class="aside-right">

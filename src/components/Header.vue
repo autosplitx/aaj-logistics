@@ -5,7 +5,9 @@
         <div class="logo">
           <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
         </div>
-        <div class="login"><a href="#">Sign in</a></div>
+        <div class="login">
+          <router-link :to="{ name: 'Registration' }">Sign in</router-link>
+        </div>
       </nav>
     </div>
   </header>

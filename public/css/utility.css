@@ -99,14 +99,14 @@ li {
 
 /* base styles */
 
-input,
+/* input,
 textarea {
-  background: rgba(225, 225, 225, 0.05);
-  padding: 10px 6px;
+  background: transparent;
+  padding: 0.8rem 0.6rem;
   border-radius: 20px;
-  border: 1px solid #9893d8;
+  border: 1px solid var(--aaj-gray-dark);
   outline: none;
-}
+} */
 
 h1,
 h2,
@@ -128,6 +128,14 @@ h2 {
 
 h4 {
   font-size: 1.1em;
+}
+
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block;
 }
 
 .border {

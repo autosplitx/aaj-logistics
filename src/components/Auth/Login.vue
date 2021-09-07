@@ -1,198 +1,80 @@
 <template>
   <div class="login-box">
-    <h2>Create your Account</h2>
-    <p>
-      Welcome to the AAJEpress family. Your shipping problems are about to fade
-      away
-    </p>
+    <h2>Login</h2>
+    <p>Type your email address and password</p>
 
     <form @submit.prevent="submitForm">
-      <div class="grid">
-        <div>
-          <div class="user-box">
-            <input
-              type="text"
-              v-model.lazy="v$.form.firstName.$model"
-              required="required"
-            />
-            <label for=""> First Name:</label>
-          </div>
-          <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-          <div
-            class="input-errors"
-            v-for="(error, index) of v$.form.firstName.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
-          </div>
-        </div>
-
-        <div>
-          <div class="user-box">
-            <input
-              type="text"
-              v-model.lazy="v$.form.lastName.$model"
-              required="required"
-            />
-            <label for="">Last Name:</label>
-          </div>
-          <div
-            class="input-errors"
-            v-for="(error, index) of v$.form.lastName.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
-          </div>
-        </div>
-      </div>
-
       <div class="user-box">
         <input
-          type="text"
-          v-model.lazy="v$.form.country.$model"
-          required="required"
-        />
-        <label for=""> Country:</label>
-      </div>
-      <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-      <div
-        class="input-errors"
-        v-for="(error, index) of v$.form.country.$errors"
-        :key="index"
-      >
-        <div class="error-msg">{{ error.$message }}</div>
-      </div>
-
-      <div class="user-box">
-        <input
-          type="text"
-          v-model.lazy="v$.form.phone.$model"
-          required="required"
-        />
-        <label for=""> Phone number:</label>
-      </div>
-      <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-      <div
-        class="input-errors"
-        v-for="(error, index) of v$.form.phone.$errors"
-        :key="index"
-      >
-        <div class="error-msg">{{ error.$message }}</div>
-      </div>
-
-      <div class="user-box">
-        <input
-          type="text"
+          type="email"
           v-model.lazy="v$.form.email.$model"
           required="required"
         />
-        <label for=""> Email address</label>
-        <div class="pre-icon os-icon os-icon-email-2-at2"></div>
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.email.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
-        </div>
+        <label>Email</label>
       </div>
-
-      <div class="grid">
-        <div class="user-box">
-          <input
-            type="password"
-            v-model.lazy="v$.form.password.$model"
-            required="required"
-          />
-          <label for=""> Password</label>
-          <div class="pre-icon os-icon os-icon-fingerprint"></div>
-          <div
-            class="input-errors"
-            v-for="(error, index) of v$.form.password.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
-          </div>
-        </div>
-
-        <div class="user-box">
-          <input
-            type="password"
-            v-model.lazy="v$.form.confirmPassword.$model"
-            required="required"
-          />
-          <label for="">Confirm Password</label>
-          <div
-            class="input-errors"
-            v-for="(error, index) of v$.form.confirmPassword.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
-          </div>
-        </div>
+      <div
+        class="input-errors"
+        v-for="(error, index) of v$.form.email.$errors"
+        :key="index"
+      >
+        <div class="error-msg">{{ error.$message }}</div>
       </div>
 
       <div class="user-box">
-        <input type="text" v-model.lazy="v$.form.refcode" required="required" />
-        <label for=""> Reference code:</label>
+        <input
+          type="password"
+          v-model.lazy="v$.form.password.$model"
+          required="required"
+        />
+        <label>Password</label>
       </div>
-      <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+      <div
+        class="input-errors"
+        v-for="(error, index) of v$.form.password.$errors"
+        :key="index"
+      >
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
 
-      <!-- Submit Button -->
       <button type="submit">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        Create my account
+        Log in
       </button>
-    </form>
 
-    <!-- <button @click="submitForm" :disabled="$v.$invalid" class="btn">
-      Create my account
-    </button> -->
+      <router-link :to="{ name: 'ForgotPassword' }" class="forgot-password"
+        >Forgot your password?</router-link
+      >
+    </form>
   </div>
 </template>
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  minLength,
-  sameAs,
-  helpers,
-} from "@vuelidate/validators";
+import { required, email, helpers } from "@vuelidate/validators";
 
 export default {
-  setup() {
-    return { v$: useVuelidate() };
-  },
-
+  name: "Login",
   data() {
     return {
+      v$: useVuelidate(),
       form: {
-        firstName: "",
-        lastName: "",
-        country: "",
-        phone: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        refcode: "",
       },
-      submitted: false,
     };
   },
 
   methods: {
     submitForm() {
-      console.log("This is working");
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
+        this.$router.push({ name: "User" });
       } else {
-        alert("Please fill out all the requred field..!");
+        alert("Form failed validation");
       }
     },
   },
@@ -200,39 +82,10 @@ export default {
   validations() {
     return {
       form: {
-        firstName: {
-          required: helpers.withMessage("This field cannot be empty", required),
-          minLength: helpers.withMessage(
-            ({ $params }) => `First name may not be less than ${$params.min}`,
-            minLength(4)
-          ),
-        },
-        lastName: {
-          required: helpers.withMessage("This field cannot be empty", required),
-          minLength: helpers.withMessage(
-            ({ $params }) => `Last name may not be less than ${$params.min} }`,
-            minLength(4)
-          ),
-        },
-        country: {
-          required: helpers.withMessage("This field cannot be empty", required),
-        },
-        phone: {
-          required: helpers.withMessage("This field cannot be empty", required),
-          minLength: helpers.withMessage(
-            ({ $params }) => `Phone may not be less than ${$params.min} }`,
-            minLength(7)
-          ),
-        },
         email: { required, email },
         password: {
-          required: helpers.withMessage("This field cannot be empty", required),
-          minLength: helpers.withMessage(
-            ({ $params }) => `Password may not be less than ${$params.min}`,
-            minLength(6)
-          ),
+          required: helpers.withMessage("Password may not be empty", required),
         },
-        confirmPassword: { required, sameAsPassword: sameAs("password") },
       },
     };
   },
@@ -248,14 +101,14 @@ export default {
 .login-box h2 {
   margin: 3rem 0 0.8rem;
   color: var(--aaj-primary-h);
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
 }
 .login-box p {
   color: var(--aaj-gray-dark);
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 0 0 1.5rem;
 }
 
@@ -265,10 +118,10 @@ export default {
 
 .login-box .user-box input {
   width: 100%;
-  padding: 0.5rem 0;
-  font-size: 1rem;
+  padding: 0.8rem 0;
+  font-size: 1.2rem;
   color: var(--aaj-gray-dark);
-  margin-bottom: 1.5rem;
+  margin-bottom: 30px;
   border: none;
   border-bottom: 1px solid var(--aaj-blue-h1);
   outline: none;
@@ -278,15 +131,17 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.5rem 0;
-  font-size: 1rem;
+  padding: 0.8rem 0;
+  font-size: 1.2rem;
   color: var(--aaj-gray-dark);
   pointer-events: none;
   transition: 0.5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input[type="email"]:focus ~ label,
+.login-box .user-box input[type="password"]:focus ~ label,
+.login-box .user-box input[type="email"]:valid ~ label,
+.login-box .user-box input[type="password"]:valid ~ label {
   top: -15px;
   left: 0;
   color: var(--aaj-yellow-green-h);
@@ -310,7 +165,7 @@ export default {
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin-top: 1rem;
+  margin-top: 2.5rem;
   letter-spacing: 2px;
 }
 
@@ -336,7 +191,6 @@ export default {
 .error-msg {
   border-color: #dc3545;
   color: #dc3545;
-  font-size: 0.7rem;
 }
 .input-errors {
   margin-top: -20px;

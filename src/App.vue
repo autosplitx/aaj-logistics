@@ -1,18 +1,24 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
+  <div>
+    <vue-progress-bar></vue-progress-bar>
+    <PageLoader />
+    <div></div>
+    <!-- <router-view v-slot="{ Component }" :key="key">
+      <transition name="view">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view> -->
 
-  <PageLoader />
-
-  <router-view v-slot="{ Component }">
-    <transition name="view">
-      <component :is="Component" />
-    </transition>
-  </router-view>
-
-  <vue-progress-bar></vue-progress-bar>
+    <router-view v-slot="{ Component }" :key="key">
+      <transition name="view" mode="out-in">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script>
@@ -20,6 +26,12 @@ import PageLoader from "./components/PageLoader.vue";
 export default {
   name: "App",
   components: { PageLoader },
+
+  computed: {
+    key() {
+      return this.$route.path;
+    },
+  },
 
   mounted() {
     this.$Progress.finish();

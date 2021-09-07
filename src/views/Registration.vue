@@ -1,9 +1,6 @@
 <template>
-  <div class="logo">
-    <router-link :to="{ name: 'Home' }">
-      <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
-    </router-link>
-  </div>
+  <Logo />
+
   <div class="tabs effect-homesidebar">
     <input
       type="radio"
@@ -31,24 +28,17 @@
 </template>
 
 <script>
-import Login from "./Login.vue";
-import Signup from "./Signup.vue";
+import Logo from "../components/Logo.vue";
+import Login from "../components/Auth/Login.vue";
+import Signup from "../components/Auth/Signup.vue";
 
 export default {
   name: "Registration",
-  components: { Login, Signup },
+  components: { Logo, Login, Signup },
 };
 </script>
 
 <style scoped>
-.logo {
-  background: var(--aaj-primary-h10);
-  padding: 0.5rem;
-}
-.logo img {
-  display: block;
-  width: 80px;
-}
 .tabs {
   /* background: var(--aaj-primary-h10); */
   position: relative;

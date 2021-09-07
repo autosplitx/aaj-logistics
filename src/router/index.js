@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Registration from "../views/Registration.vue";
+import User from "../views/User.vue";
+import Dashboard from "../components/Users/Dashboard.vue";
+import RequestPayment from "../components/Users/CustomersActivities/RequestPayment.vue";
 
 const routes = [
   {
@@ -51,44 +54,102 @@ const routes = [
       ],
     },
   },
-  // {
-  //   path: "/registration",
-  //   name: "Registration",
-  //   component: () =>
-  //     import(/* webpackChunkName: "registration" */ "../views/Registration.vue"),
-  //   meta: {
-  //     title: "Registration | AAJExpress",
-  //     metaTags: [
-  //       {
-  //         name: "description",
-  //         content: "The registration page of AAJExpress.",
-  //       },
-  //       {
-  //         property: "og:description",
-  //         content: "The registration page of AAJExpress.",
-  //       },
-  //     ],
-  //   },
-  // },
-  // {
-  //   path: "/signup",
-  //   name: "Signup",
-  //   component: () =>
-  //     import(/* webpackChunkName: "signup" */ "../views/Signup.vue"),
-  //   meta: {
-  //     title: "Signup | AAJExpress",
-  //     metaTags: [
-  //       {
-  //         name: "description",
-  //         content: "The signup page of AAJExpress.",
-  //       },
-  //       {
-  //         property: "og:description",
-  //         content: "The signup page of AAJExpress.",
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    path: "/forgot-password",
+    name: "ForgotPassword",
+    component: () =>
+      import(
+        /* webpackChunkName: "forgot-password" */ "../components/Auth/ForgotPassword.vue"
+      ),
+    meta: {
+      title: "Reset Password | AAJExpress",
+      metaTags: [
+        {
+          name: "description",
+          content: "The reset password page of AAJExpress.",
+        },
+        {
+          property: "og:description",
+          content: "The reset password page of AAJExpress.",
+        },
+      ],
+    },
+  },
+  {
+    path: "/user",
+    component: User,
+    meta: {
+      title: "User - AAJExpress",
+      metaTags: [
+        {
+          name: "description",
+          content: "The user's page of AAJExpress.",
+        },
+        {
+          property: "og:description",
+          content: "The user's page of AAJExpress.",
+        },
+      ],
+    },
+    children: [
+      {
+        path: "",
+        name: "user.dashboard",
+        component: Dashboard,
+        meta: {
+          title: "User | Dashboard - AAJExpress",
+        },
+      },
+      {
+        path: "requestpayment",
+        name: "user.requestpayment",
+        component: RequestPayment,
+        meta: {
+          title: "Request Payment | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The request payment's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The request payment's page of AAJExpress.",
+            },
+          ],
+        },
+      },
+      // {
+      //   path: "products",
+      //   component: Products,
+      //   children: [
+      //     {
+      //       path: "",
+      //       name: "admin.products",
+      //       component: ProductTable,
+      //       meta: {
+      //         title: "Admin | Products - AAJExpress",
+      //       },
+      //     },
+      //     {
+      //       path: "images",
+      //       name: "products.images",
+      //       component: ProductImages,
+      //       meta: {
+      //         title: "Admin | Product Images - AAJExpress",
+      //       },
+      //     },
+      //     {
+      //       path: "tags",
+      //       name: "products.tags",
+      //       component: Tags,
+      //       meta: {
+      //         title: "Admin | Product Tags - AAJExpress",
+      //       },
+      //     },
+      //   ],
+      // },
+    ],
+  },
 ];
 
 const router = createRouter({

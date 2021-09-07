@@ -22,13 +22,13 @@
 
 <script>
 import Header from "./Header.vue";
-import Hero from "./Home/Hero.vue";
-import Shipping from "./Home/Shipping.vue";
-import CountryFlag from "./Home/CountryFlag.vue";
-import Provider from "./Home/Provider.vue";
-import Ecommerce from "./Home/Ecommerce.vue";
-import Faq from "./Home/Faq.vue";
-import Footer from "./Home/Footer.vue";
+import Hero from "./Hero.vue";
+import Shipping from "./Shipping.vue";
+import CountryFlag from "./CountryFlag.vue";
+import Provider from "./Provider.vue";
+import Ecommerce from "./Ecommerce.vue";
+import Faq from "./Faq.vue";
+import Footer from "./Footer.vue";
 export default {
   name: "HomePage",
   props: {

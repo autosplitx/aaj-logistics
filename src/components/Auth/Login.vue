@@ -72,7 +72,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        this.$router.push({ name: "User" });
+        this.$router.push({ name: "user.dashboard" });
       } else {
         alert("Form failed validation");
       }

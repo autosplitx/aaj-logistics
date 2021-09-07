@@ -72,7 +72,7 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         alert("Form successfully submitted.");
-        this.$router.push({ name: "user.dashboard" });
+        this.$router.push({ name: "User" });
       } else {
         alert("Form failed validation");
       }
@@ -191,99 +191,39 @@ export default {
 .error-msg {
   border-color: #dc3545;
   color: #dc3545;
+  font-size: 0.7rem;
 }
+
 .input-errors {
   margin-top: -20px;
 }
 
 @media (min-width: 1025px) {
   .login-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
   }
-
-  .login-box h2 {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
-    text-align: center;
+  .login-box p {
+    font-size: 0.8rem;
   }
-
-  .login-box .user-box {
-    position: relative;
+  .forgot-password {
+    width: 200px;
+    margin: 1.5rem auto;
+    color: var(--aaj-primary-h10);
   }
-
-  .login-box .user-box input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    outline: none;
-    background: transparent;
-  }
-  .login-box .user-box label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 1rem;
-    color: #fff;
-    pointer-events: none;
-    transition: 0.5s;
-  }
-
-  .login-box .user-box input:focus ~ label,
-  .login-box .user-box input:valid ~ label {
-    top: -20px;
-    left: 0;
-    color: var(--aaj-primary-h);
-    font-size: 12px;
-  }
-
   .login-box form button {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    font-size: 1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: 0.5s;
-    margin-top: 40px;
-    letter-spacing: 2px;
-  }
-
-  .login-box a:hover {
-    background: var(--aaj-primary-h);
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px var(--aaj-primary-h), 0 0 25px var(--aaj-primary-h),
-      0 0 50px var(--aaj-primary-h), 0 0 100px var(--aaj-primary-h);
-  }
-
-  .login-box a span {
-    position: absolute;
     display: block;
+    width: 60%;
+    margin: 10px auto;
+    cursor: pointer;
   }
 
-  .login-box a span:nth-child(1) {
+  .login-box button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--aaj-blue-h));
+    background: linear-gradient(90deg, transparent, var(--aaj-yellow-green-h));
     animation: btn-anim1 1s linear infinite;
   }
 
@@ -297,12 +237,12 @@ export default {
     }
   }
 
-  .login-box a span:nth-child(2) {
+  .login-box button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, var(--aaj-blue-h));
+    background: linear-gradient(180deg, transparent, var(--aaj-yellow-green-h));
     animation: btn-anim2 1s linear infinite;
     animation-delay: 0.25s;
   }
@@ -317,12 +257,12 @@ export default {
     }
   }
 
-  .login-box a span:nth-child(3) {
+  .login-box button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, var(--aaj-blue-h));
+    background: linear-gradient(270deg, transparent, var(--aaj-yellow-green-h));
     animation: btn-anim3 1s linear infinite;
     animation-delay: 0.5s;
   }
@@ -337,12 +277,12 @@ export default {
     }
   }
 
-  .login-box a span:nth-child(4) {
+  .login-box button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, var(--aaj-blue-h));
+    background: linear-gradient(360deg, transparent, var(--aaj-yellow-green-h));
     animation: btn-anim4 1s linear infinite;
     animation-delay: 0.75s;
   }

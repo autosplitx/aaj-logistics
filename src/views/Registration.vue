@@ -130,4 +130,37 @@ export default {
 #tab-reg:checked ~ .tab-content #tab-item-reg {
   display: block;
 }
+
+@media (min-width: 641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+}
+
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .tabs > input[type="radio"],
+  .tabs > span {
+    display: none;
+  }
+
+  .effect-homesidebar .line {
+    display: none;
+  }
+
+  .tab-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    padding: 0 1rem 1rem;
+    height: auto;
+  }
+
+  .tab-content section {
+    display: block;
+  }
+  
+}
 </style>

@@ -1,8 +1,10 @@
 <template>
   <div class="logo">
-    <router-link :to="{ name: 'Home' }">
-      <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
-    </router-link>
+    <div class="container">
+      <router-link :to="{ name: 'Home' }">
+        <img src="/img/aaj/logo.png" alt="AAJ Logistics" />
+      </router-link>
+    </div>
   </div>
 </template>
 

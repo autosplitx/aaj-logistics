@@ -186,12 +186,10 @@ export default {
 .header-item p {
   color: var(--aaj-primary-h10);
 }
-
 .customer-content {
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   margin-top: 5rem;
 }
-
 .content-item {
   text-transform: uppercase;
 }
@@ -284,6 +282,7 @@ export default {
   }
 
   .customer-content {
+    padding: 0 0.5rem;
     margin-top: 5.5rem;
   }
   .content-item .card {

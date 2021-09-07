@@ -2,15 +2,6 @@
   <div>
     <vue-progress-bar></vue-progress-bar>
     <PageLoader />
-    <div></div>
-    <!-- <router-view v-slot="{ Component }" :key="key">
-      <transition name="view">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
-    </router-view> -->
-
     <router-view v-slot="{ Component }" :key="key">
       <transition name="view" mode="out-in">
         <keep-alive>

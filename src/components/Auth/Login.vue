@@ -74,7 +74,7 @@ export default {
         alert("Form successfully submitted.");
         this.$router.push({ name: "user.dashboard" });
       } else {
-        alert("Form failed validation");
+        // alert("Form failed validation");
       }
     },
   },
@@ -118,10 +118,10 @@ export default {
 
 .login-box .user-box input {
   width: 100%;
-  padding: 0.8rem 0;
-  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  font-size: 1rem;
   color: var(--aaj-gray-dark);
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
   border: none;
   border-bottom: 1px solid var(--aaj-blue-h1);
   outline: none;
@@ -131,8 +131,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.8rem 0;
-  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  font-size: 1rem;
   color: var(--aaj-gray-dark);
   pointer-events: none;
   transition: 0.5s;

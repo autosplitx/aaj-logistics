@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
+
 import Home from "../views/Home.vue";
 import Registration from "../views/Registration.vue";
 import User from "../views/User.vue";
 import Dashboard from "../components/Users/Dashboard.vue";
 import RequestPayment from "../components/Users/CustomersActivities/RequestPayment.vue";
+import Rate from "../components/Users/CustomersActivities/Rate.vue";
+import Wallet from "../components/Users/CustomersActivities/Wallet.vue";
+import TopUpWallet from "../components/Users/CustomersActivities/TopUpWallet.vue";
 
 const routes = [
   {
@@ -114,6 +118,60 @@ const routes = [
             {
               property: "og:description",
               content: "The request payment's page of AAJExpress.",
+            },
+          ],
+        },
+      },
+      {
+        path: "rate",
+        name: "user.rate",
+        component: Rate,
+        meta: {
+          title: "Rate | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The rate's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The rate's page of AAJExpress.",
+            },
+          ],
+        },
+      },
+      {
+        path: "wallet",
+        name: "user.wallet",
+        component: Wallet,
+        meta: {
+          title: "Wallet | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The wallet's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The wallet's page of AAJExpress.",
+            },
+          ],
+        },
+      },
+      {
+        path: "topupwallet",
+        name: "user.topupwallet",
+        component: TopUpWallet,
+        meta: {
+          title: "Top Up Wallet | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The top up wallet's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The top up wallet's page of AAJExpress.",
             },
           ],
         },

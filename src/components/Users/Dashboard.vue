@@ -43,7 +43,7 @@
           </router-link>
         </div>
         <div class="card">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.rate' }">
             <div class="card-img">
               <img src="/img/aaj/rate.svg" alt="Rate" />
             </div>
@@ -53,7 +53,7 @@
           </router-link>
         </div>
         <div class="card fund">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.wallet' }">
             <div class="card-img">
               <img src="/img/aaj/wallet.svg" alt="Fund Wallet" />
             </div>
@@ -303,6 +303,15 @@ export default {
 
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+  .avatar {
+    padding: 2rem 2rem 0;
+  }
+  .account .card {
+    padding: 2rem 0;
+  }
+  .customer-header {
+    height: 20vh;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -310,7 +319,7 @@ export default {
     width: 100%;
   }
   .customer-header {
-    height: 30vh;
+    height: 40vh;
   }
 
   .content-item .card {

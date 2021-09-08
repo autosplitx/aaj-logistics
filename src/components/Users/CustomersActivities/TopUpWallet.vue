@@ -2,80 +2,35 @@
   <div class="container">
     <div class="request-wrap">
       <div class="requests">
-        <h2>Who is this payment for?</h2>
+        <h2>Enter the amount you would like to topup</h2>
         <p>
           Please note that all payments will be received in your local currency
         </p>
         <form>
           <div class="user-box">
             <input
-              type="text"
-              v-model.trim.lazy="v$.form.userdetail.$model"
+              type="number"
+              v-model.trim.lazy="v$.form.topUp.$model"
               required="required"
             />
-            <label for="">Email Or Phone number:</label>
+            <label for="">500:</label>
           </div>
           <div class="pre-icon os-icon os-icon-user-male-circle"></div>
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.userdetail.$errors"
+            v-for="(error, index) of v$.form.topUp.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
           </div>
-          <div class="grid">
-            <div>
-              <div class="user-box">
-                <input
-                  type="text"
-                  v-model.trim.lazy="v$.form.country.$model"
-                  required="required"
-                />
-                <label for=""> Country:</label>
-              </div>
-              <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-              <div
-                class="input-errors"
-                v-for="(error, index) of v$.form.country.$errors"
-                :key="index"
-              >
-                <div class="error-msg">{{ error.$message }}</div>
-              </div>
-            </div>
-            <div>
-              <div class="user-box">
-                <input
-                  type="number"
-                  v-model.trim.lazy="v$.form.amount.$model"
-                  required="required"
-                />
-                <label for="">Amount:</label>
-              </div>
-              <div
-                class="input-errors"
-                v-for="(error, index) of v$.form.amount.$errors"
-                :key="index"
-              >
-                <div class="error-msg">{{ error.$message }}</div>
-              </div>
-            </div>
-          </div>
-          <div class="grid">
-            <button type="submit" @click="submitRequest">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Request
-            </button>
-            <button type="submit" @click="submitSend">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Send
-            </button>
-          </div>
+
+          <button type="submit" @click="submitTopUp">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Topup wallet
+          </button>
         </form>
       </div>
     </div>
@@ -87,33 +42,21 @@ import useVuelidate from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 
 export default {
-  name: "RequestPayment",
+  name: "TopUpWallet",
 
   data() {
     return {
       v$: useVuelidate(),
 
       form: {
-        userdetail: "",
-        country: "",
-        amount: "",
+        topUp: "",
       },
       submitted: false,
     };
   },
 
   methods: {
-    submitRequest() {
-      this.v$.$validate();
-      if (!this.v$.$error) {
-        alert("Form successfully submitted.");
-        console.log(this.form);
-      } else {
-        // alert("Please fill out all the required field..!");
-      }
-    },
-
-    submitSend() {
+    submitTopUp() {
       this.v$.$validate();
       // console.log("This is working", this.v$);
       if (!this.v$.$error) {
@@ -128,20 +71,8 @@ export default {
   validations() {
     return {
       form: {
-        userdetail: {
+        topUp: {
           required: helpers.withMessage("This field cannot be empty", required),
-        },
-        country: {
-          required: helpers.withMessage(
-            "Country field cannot be empty",
-            required
-          ),
-        },
-        amount: {
-          required: helpers.withMessage(
-            "Amount field cannot be empty",
-            required
-          ),
         },
       },
     };
@@ -216,7 +147,6 @@ export default {
   font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
-  text-transform: uppercase;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;

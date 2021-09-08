@@ -191,7 +191,7 @@ export default {
         alert("Form successfully submitted.");
         console.log(this.form);
       } else {
-        alert("Please fill out all the requred field..!");
+        // alert("Please fill out all the required field..!");
       }
     },
   },

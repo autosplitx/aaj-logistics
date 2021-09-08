@@ -7,7 +7,7 @@
       <div class="header">
         <div class="toggle-bars">
           <router-link :to="{ name: 'user.dashboard' }"
-            ><img src="/img/aaj/logo.png" alt="Bars"
+            ><img src="/img/aaj/user1.png" alt="Bars"
           /></router-link>
         </div>
         <div class="notification">
@@ -47,13 +47,15 @@ export default {
   align-items: center;
 }
 .toggle-bars img {
-  width: 150% !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background-color: var(--aaj-primary-h10);
-  border-radius: 25px;
 }
-.header img {
+.notification img {
   width: 20px;
   height: 20px;
+  border-radius: 50%;
 }
 
 .notification {
@@ -91,7 +93,7 @@ export default {
     justify-content: space-between;
     align-items: center;
   }
-  .header img {
+  .notification img {
     width: 20px;
     height: 20px;
   }

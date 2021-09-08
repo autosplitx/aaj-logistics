@@ -19,7 +19,7 @@
           </div> -->
         </div>
         <div class="card">
-          <router-link :to="{ name: 'TopUpWallet' }">
+          <router-link :to="{ name: 'user.topupwallet' }">
             <div class="top-up">
               <img src="/img/aaj/topup.svg" alt="Top up" />
               <h5>Top Up</h5>

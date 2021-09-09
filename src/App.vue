@@ -2,13 +2,7 @@
   <div>
     <vue-progress-bar></vue-progress-bar>
     <PageLoader />
-    <router-view v-slot="{ Component }" :key="key">
-      <transition name="view" mode="out-in">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
-    </router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -17,12 +11,6 @@ import PageLoader from "./components/PageLoader.vue";
 export default {
   name: "App",
   components: { PageLoader },
-
-  computed: {
-    key() {
-      return this.$route.path;
-    },
-  },
 
   mounted() {
     this.$Progress.finish();

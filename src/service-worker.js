@@ -1,4 +1,7 @@
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.setConfig({ debug: true });
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
 let click_open_url;
 // Web push Notification //
 self.addEventListener("push", function (event) {
@@ -40,7 +43,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js"
 );
 
-importScripts("/precache-manifest.04f2369ccdc321e67db798ac1aed0b5b.js");
+importScripts("/precache-manifest.594193e097db0d5ca90b20dfa2c1b16f.js");
 
 workbox.core.setCacheNameDetails({ prefix: "aaj-express" });
 
@@ -49,7 +52,3 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
-
-self.__precacheManifest = [].concat(self.__precacheManifest || []);
-
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

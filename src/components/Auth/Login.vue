@@ -3,7 +3,7 @@
     <h2>Login</h2>
     <p>Type your email address and password</p>
 
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="loginForm">
       <div class="user-box">
         <input
           type="email"
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required, email, helpers } from "@vuelidate/validators";
 
@@ -67,14 +68,23 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState({
+      errors: (state) => state.auth.errors,
+    }),
+  },
+
   methods: {
-    submitForm() {
+    ...mapActions("auth", ["loginUser"]),
+
+    loginForm() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        alert("Form successfully submitted.");
+        this.loginUser(this.form);
+        // alert("Form successfully submitted.");
         this.$router.push({ name: "user.dashboard" });
       } else {
-        // alert("Form failed validation");
+        console.log("Form failed validation");
       }
     },
   },

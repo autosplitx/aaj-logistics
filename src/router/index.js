@@ -120,6 +120,8 @@ const routes = [
               content: "The request payment's page of AAJExpress.",
             },
           ],
+          enterTrans: "animate__animated animate__fadeInLeft",
+          leaveTrans: "animate__animated animate__fadeOutRight",
         },
       },
       {
@@ -138,6 +140,8 @@ const routes = [
               content: "The rate's page of AAJExpress.",
             },
           ],
+          enterTrans: "animate__animated animate__fadeInRight",
+          leaveTrans: "animate__animated animate__fadeOutLeft",
         },
       },
       {
@@ -156,6 +160,8 @@ const routes = [
               content: "The wallet's page of AAJExpress.",
             },
           ],
+          enterTrans: "animate__animated animate__fadeInLeft",
+          leaveTrans: "animate__animated animate__fadeOutRight",
         },
       },
       {
@@ -174,6 +180,8 @@ const routes = [
               content: "The top up wallet's page of AAJExpress.",
             },
           ],
+          enterTrans: "animate__animated animate__fadeInRight",
+          leaveTrans: "animate__animated animate__fadeOutLeft",
         },
       },
       // {

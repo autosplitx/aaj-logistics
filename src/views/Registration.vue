@@ -161,6 +161,5 @@ export default {
   .tab-content section {
     display: block;
   }
-  
 }
 </style>

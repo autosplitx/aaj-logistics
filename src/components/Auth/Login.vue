@@ -3,7 +3,18 @@
     <h2>Login</h2>
     <p>Type your email address and password</p>
 
-    <form @submit.prevent="loginForm">
+    <div class="animate__animated animate__pulse animate__infinite infinite">
+      <ul>
+        <template v-if="errors != 0">
+          <li class="error-msg text-center">
+            {{ errors }}
+          </li>
+        </template>
+        <!-- <template v-else> kk</template> -->
+      </ul>
+    </div>
+
+    <form>
       <div class="user-box">
         <input
           type="email"
@@ -36,7 +47,7 @@
         <div class="error-msg">{{ error.$message }}</div>
       </div>
 
-      <button type="submit">
+      <button type="submit" @click.prevent="loginForm">
         <span></span>
         <span></span>
         <span></span>
@@ -62,6 +73,7 @@ export default {
     return {
       v$: useVuelidate(),
       form: {
+        aksi: "process_login",
         email: "",
         password: "",
       },
@@ -81,10 +93,6 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         this.loginUser(this.form);
-        // alert("Form successfully submitted.");
-        this.$router.push({ name: "user.dashboard" });
-      } else {
-        console.log("Form failed validation");
       }
     },
   },
@@ -179,13 +187,6 @@ export default {
   letter-spacing: 2px;
 }
 
-.login-box button:hover {
-  color: var(--aaj-gray-light);
-  border-radius: 30px;
-  box-shadow: 0 0 5px var(--aaj-gray-light), 0 0 25px var(--aaj-gray-light),
-    0 0 30px var(--aaj-gray-light), 0 0 80px var(--aaj-gray-light);
-}
-
 .forgot-password {
   display: block;
   text-align: center;
@@ -226,6 +227,13 @@ export default {
     width: 60%;
     margin: 10px auto;
     cursor: pointer;
+  }
+
+  .login-box button:hover {
+    color: var(--aaj-gray-light);
+    border-radius: 30px;
+    box-shadow: 0 0 5px var(--aaj-gray-light), 0 0 25px var(--aaj-gray-light),
+      0 0 30px var(--aaj-gray-light), 0 0 80px var(--aaj-gray-light);
   }
 
   .login-box button span:nth-child(1) {

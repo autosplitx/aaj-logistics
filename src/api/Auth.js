@@ -1,5 +1,4 @@
 import Api from "./Api";
-// import Csrf from "./Csrf";
 
 const END_POINT = "v1/users";
 
@@ -25,24 +24,23 @@ export default {
   },
 
   async register(data) {
-    // await Csrf.getCookie();
     console.log(data);
-    return Api.post("v1/register", data);
+    return Api.post("process_api.php", data);
   },
 
   async login(data) {
-    // await Csrf.getCookie();
-    return Api.post("v1/users/login-api.php", data);
+    // return Api.post("/v1/users/login-api.php", data);
+    // return Api.post("v1/login", data);
+    return Api.post("process_api.php", data);
   },
 
-  async logout() {
-    // await Csrf.getCookie();
-    return Api.post("v1/logout");
+  async logout(data) {
+    return Api.post("process_api.php", data);
   },
 
-  auth() {
-    return Api.get("/user");
-  },
+  // auth() {
+  //   return Api.get("v1/user");
+  // },
 
   pagination(page) {
     return Api.get(`${END_POINT}?page=${page}`);

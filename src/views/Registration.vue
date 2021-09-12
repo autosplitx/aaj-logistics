@@ -58,7 +58,7 @@ export default {
   filter: alpha(opacity=0);
   opacity: 0;
   position: absolute;
-  z-index: 99;
+  z-index: 10;
 }
 
 .tabs > span {
@@ -72,11 +72,6 @@ export default {
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
-}
-
-.tabs > input[type="radio"]:hover + span {
-  background: var(--aaj-primary-h1);
-  color: var(--aaj-gray-light);
 }
 
 .effect-homesidebar .line {
@@ -144,6 +139,11 @@ export default {
   .tabs > input[type="radio"],
   .tabs > span {
     display: none;
+  }
+
+  .tabs > input[type="radio"]:hover + span {
+    background: var(--aaj-primary-h1);
+    color: var(--aaj-gray-light);
   }
 
   .effect-homesidebar .line {

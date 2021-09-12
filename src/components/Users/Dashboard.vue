@@ -5,7 +5,7 @@
         <div class="avatar">
           <div class="flex">
             <h5>{{ greetings }}</h5>
-            <h4>{{ userName }}</h4>
+            <h4 v-if="user">{{ fullName }}</h4>
           </div>
         </div>
 
@@ -33,7 +33,7 @@
     <div class="customer-content container">
       <div class="grid grid-3 content-item">
         <div class="card">
-          <router-link :to="{ name: 'user.requestpayment' }">
+          <router-link :to="{ name: 'user.requestpayment' }" exact>
             <div class="card-img">
               <img src="/img/aaj/send.svg" alt="Request Payment" />
             </div>
@@ -43,7 +43,7 @@
           </router-link>
         </div>
         <div class="card">
-          <router-link :to="{ name: 'user.rate' }">
+          <router-link :to="{ name: 'user.rate' }" exact>
             <div class="card-img">
               <img src="/img/aaj/rate.svg" alt="Rate" />
             </div>
@@ -53,7 +53,7 @@
           </router-link>
         </div>
         <div class="card fund">
-          <router-link :to="{ name: 'user.wallet' }">
+          <router-link :to="{ name: 'user.wallet' }" exact>
             <div class="card-img">
               <img src="/img/aaj/wallet.svg" alt="Fund Wallet" />
             </div>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="card">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.transaction' }" exact>
             <div class="card-img">
               <img src="/img/aaj/request.svg" alt="Request Shipment" />
             </div>
@@ -74,7 +74,7 @@
           </router-link>
         </div>
         <div class="card">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.dashboard' }" exact>
             <div class="card-img">
               <img src="/img/aaj/track.svg" alt="Track Shipment" />
             </div>
@@ -84,7 +84,7 @@
           </router-link>
         </div>
         <div class="card">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.dashboard' }" exact>
             <div class="card-img">
               <img src="/img/aaj/invite.svg" alt="Invitation" />
             </div>
@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import moment from "moment";
 export default {
   name: "Dashboard",
@@ -107,7 +108,6 @@ export default {
     return {
       greetings: "",
       foramtted: "",
-      userName: "Aderibipe Ashabi",
     };
   },
 
@@ -123,6 +123,16 @@ export default {
       else if (hrs >= 12 && hrs <= 17) greet = "Good Afternoon";
       else if (hrs >= 17 && hrs <= 24) greet = "Good Evening";
       this.greetings = greet;
+    },
+  },
+
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
+
+    fullName: function () {
+      return this.user.first_name + " " + this.user.last_name;
     },
   },
 

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../views/Home.vue";
 import Registration from "../views/Registration.vue";
+import Transaction from "../views/Transaction";
 import User from "../views/User.vue";
 import Dashboard from "../components/Users/Dashboard.vue";
 import RequestPayment from "../components/Users/CustomersActivities/RequestPayment.vue";
@@ -120,8 +121,24 @@ const routes = [
               content: "The request payment's page of AAJExpress.",
             },
           ],
-          enterTrans: "animate__animated animate__fadeInLeft",
-          leaveTrans: "animate__animated animate__fadeOutRight",
+        },
+      },
+      {
+        path: "transaction",
+        name: "user.transaction",
+        component: Transaction,
+        meta: {
+          title: "Transaction | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The transaction's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The transaction's page of AAJExpress.",
+            },
+          ],
         },
       },
       {
@@ -140,8 +157,6 @@ const routes = [
               content: "The rate's page of AAJExpress.",
             },
           ],
-          enterTrans: "animate__animated animate__fadeInRight",
-          leaveTrans: "animate__animated animate__fadeOutLeft",
         },
       },
       {
@@ -160,8 +175,6 @@ const routes = [
               content: "The wallet's page of AAJExpress.",
             },
           ],
-          enterTrans: "animate__animated animate__fadeInLeft",
-          leaveTrans: "animate__animated animate__fadeOutRight",
         },
       },
       {
@@ -180,8 +193,6 @@ const routes = [
               content: "The top up wallet's page of AAJExpress.",
             },
           ],
-          enterTrans: "animate__animated animate__fadeInRight",
-          leaveTrans: "animate__animated animate__fadeOutLeft",
         },
       },
       // {
@@ -215,6 +226,24 @@ const routes = [
       //   ],
       // },
     ],
+  },
+
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("../components/NotFound.vue"),
+    meta: {
+      title: "Error 404 | AAJExpress",
+      metaTags: [
+        {
+          name: "description",
+          content: "The error 404 page of AAJExpress.",
+        },
+        {
+          property: "og:description",
+          content: "The error 404 page of AAJExpress.",
+        },
+      ],
+    },
   },
 ];
 

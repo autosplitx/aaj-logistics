@@ -1,16 +1,23 @@
 <template>
   <div>
-    <vue-progress-bar></vue-progress-bar>
     <PageLoader />
+    <vue-progress-bar></vue-progress-bar>
     <router-view></router-view>
+    <NotificationsList />
   </div>
 </template>
 
 <script>
 import PageLoader from "./components/PageLoader.vue";
+import NotificationsList from "./components/NotificationsList.vue";
+
 export default {
   name: "App",
-  components: { PageLoader },
+  components: { PageLoader, NotificationsList },
+
+  data() {
+    return {};
+  },
 
   mounted() {
     this.$Progress.finish();

@@ -1,65 +1,143 @@
 <template>
-  <!-- <Logo /> -->
-  <!-- <Sidebar :userName="userName" /> -->
+  <!-- <Sidebar :user="user" :isAuth="authenticated" :openSidebar="openSidebar" /> -->
 
   <div class="user">
     <div class="container">
       <div class="header">
-        <div class="toggle-bars">
-          <router-link :to="{ name: 'user.dashboard' }"
-            ><img src="/img/aaj/user1.png" alt="Bars"
-          /></router-link>
-        </div>
+        <router-link :to="{ name: 'user.dashboard' }">
+          <img src="/img/aaj/user1.png" alt="Customer's Avatar" />
+        </router-link>
+        <router-link :to="{ name: 'Home' }">
+          <i class="fa fa-home"></i>
+        </router-link>
+        <!-- <template v-if="!openSidebar">
+          <div class="toggle-bars" @click="toggleSidebar">
+            <i class="fa fa-bars"></i>
+          </div>
+          <img src="/img/aaj/user1.png" alt="AAJExpress Logo" />
+        </template>
+        <template v-else>
+          <div class="toggle-bars move" @click="toggleSidebar">
+            <i class="fa fa-times"></i>
+          </div>
+        </template> -->
         <div class="notification">
-          <img src="/img/aaj/bell.svg" alt="Notification" />
+          <i class="fa fa-bell"></i>
           <!-- <div class="counter">2</div> -->
+          <button @click.prevent="logout">
+            <i class="fa fa-power-off logout"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <router-view></router-view>
-
-  <!-- <Customer :userName="userName" :greetings="greetings" /> -->
 </template>
 
 <script>
-// import Sidebar from "../components/Customer/Sidebar.vue";
+import { mapGetters, mapActions } from "vuex";
+// import Sidebar from "../components/Users/Sidebar.vue";
 
-// eslint-disable-next-line no-unused-vars
 export default {
   name: "User",
+  // components: { Sidebar },
 
   data() {
-    return {};
+    return { openSidebar: false };
   },
+
+  computed: {
+    ...mapGetters({
+      authenticated: "auth/authenticated",
+      user: "auth/user",
+    }),
+  },
+
+  methods: {
+    // ...mapActions("auth", ["getAuthUser"]),
+
+    ...mapActions("auth", ["logoutUser"]),
+
+    logout() {
+      this.logoutUser({ aksi: "logout" });
+    },
+
+    toggleSidebar() {
+      this.openSidebar = !this.openSidebar;
+    },
+  },
+
+  // mounted() {
+  //   this.getAuthUser();
+  // },
 };
 </script>
 
 <style scoped>
 .user {
   background: var(--aaj-primary-h);
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.toggle-bars img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--aaj-primary-h10);
-}
-.notification img {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+  margin: 0.8rem 0.5rem;
 }
 
 .notification {
   position: relative;
+}
+
+.toggle-bars,
+.notification {
+  color: var(--aaj-blue-h1);
+}
+
+.notification button {
+  font-size: 1rem;
+  text-decoration: none;
+  margin-left: 20px;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: 0;
+}
+
+.notification button i {
+  width: 30px;
+  height: 30px;
+  color: var(--aaj-blue-h1);
+  font-size: 1.2rem;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0.3rem;
+  /* margin-right: 1rem; */
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: block;
+}
+
+.toggle-bars.move {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #fff;
+  z-index: 15;
 }
 
 /* .counter {
@@ -80,13 +158,22 @@ export default {
 
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .toggle-bars {
+    display: none;
+  }
+
+  .header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: block;
+  }
 }
 
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
   .user {
     background: var(--aaj-primary-h);
-    padding: 1rem;
   }
   .header {
     display: flex;

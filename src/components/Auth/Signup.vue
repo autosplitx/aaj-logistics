@@ -6,13 +6,27 @@
       away
     </p>
 
-    <form @submit.prevent="submitForm">
+    <div class="animate__animated animate__pulse animate__infinite infinite">
+      <ul>
+        <template v-if="errors">
+          <li
+            class="error-msg text-center"
+            v-for="(error, index) in errors"
+            :key="index"
+          >
+            {{ error }}
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    <form>
       <div class="grid">
         <div>
           <div class="user-box">
             <input
               type="text"
-              v-model.lazy="v$.form.firstName.$model"
+              v-model.lazy="v$.form.first_name.$model"
               required="required"
             />
             <label for=""> First Name:</label>
@@ -20,7 +34,7 @@
           <div class="pre-icon os-icon os-icon-user-male-circle"></div>
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.firstName.$errors"
+            v-for="(error, index) of v$.form.first_name.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
@@ -31,14 +45,14 @@
           <div class="user-box">
             <input
               type="text"
-              v-model.lazy="v$.form.lastName.$model"
+              v-model.lazy="v$.form.last_name.$model"
               required="required"
             />
             <label for="">Last Name:</label>
           </div>
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.lastName.$errors"
+            v-for="(error, index) of v$.form.last_name.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
@@ -118,13 +132,13 @@
         <div class="user-box">
           <input
             type="password"
-            v-model.lazy="v$.form.confirmPassword.$model"
+            v-model.lazy="v$.form.confirm_password.$model"
             required="required"
           />
           <label for="">Confirm Password</label>
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.confirmPassword.$errors"
+            v-for="(error, index) of v$.form.confirm_password.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
@@ -134,12 +148,12 @@
 
       <div class="user-box">
         <input type="text" v-model.lazy="v$.form.refcode" optional />
-        <label for=""> Reference code:</label>
+        <label for=""> Referrer code:</label>
       </div>
       <div class="pre-icon os-icon os-icon-user-male-circle"></div>
 
       <!-- Submit Button -->
-      <button type="submit">
+      <button type="submit" @click.prevent="register">
         <span></span>
         <span></span>
         <span></span>
@@ -148,13 +162,14 @@
       </button>
     </form>
 
-    <!-- <button @click="submitForm" :disabled="$v.$invalid" class="btn">
+    <!-- <button @click="register" :disabled="$v.$invalid" class="btn">
       Create my account
     </button> -->
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -170,28 +185,33 @@ export default {
       v$: useVuelidate(),
 
       form: {
-        firstName: "",
-        lastName: "",
+        aksi: "process_register",
+        first_name: "",
+        last_name: "",
         country: "",
         phone: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        confirm_password: "",
         refcode: "",
       },
-      submitted: false,
     };
   },
 
+  computed: {
+    ...mapState({
+      errors: (state) => state.auth.errors,
+    }),
+  },
+
   methods: {
-    submitForm() {
+    ...mapActions("auth", ["addUser"]),
+
+    register() {
       this.v$.$validate();
-      // console.log("This is working", this.v$);
       if (!this.v$.$error) {
-        alert("Form successfully submitted.");
-        console.log(this.form);
-      } else {
-        // alert("Please fill out all the required field..!");
+        this.addUser(this.form);
+        this.reset();
       }
     },
   },
@@ -199,7 +219,7 @@ export default {
   validations() {
     return {
       form: {
-        firstName: {
+        first_name: {
           required: helpers.withMessage(
             "First name field cannot be empty",
             required
@@ -209,7 +229,7 @@ export default {
             minLength(4)
           ),
         },
-        lastName: {
+        last_name: {
           required: helpers.withMessage(
             "Last name field cannot be empty",
             required
@@ -246,7 +266,7 @@ export default {
             minLength(6)
           ),
         },
-        confirmPassword: {
+        confirm_password: {
           required: helpers.withMessage(
             "Confirm password field cannot be empty",
             required
@@ -257,6 +277,19 @@ export default {
           ),
         },
       },
+    };
+  },
+
+  reset() {
+    this.form = {
+      first_name: "",
+      last_name: "",
+      country: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+      refcode: "",
     };
   },
 };

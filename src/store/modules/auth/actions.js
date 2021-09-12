@@ -54,16 +54,17 @@ export const storeUser = ({ commit, dispatch }, formData) => {
 /*          //TODO: Action is used to create GUEST from application & can later be assigned ROLE by the ADMIN         */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-export const addUser = ({ commit, dispatch }, formData) => {
+export const addUser = ({ commit }, formData) => {
+  console.log(formData);
   User.register(formData)
     .then(() => {
       commit("SET_USER_ERROR", []);
       router.push({ name: "Home" });
-      dispatch(
-        "addNotification",
-        { type: "success", message: "Registration Completed 😊", count: 0 },
-        { root: true }
-      );
+      // dispatch(
+      //   "addNotification",
+      //   { type: "success", message: "Registration Completed 😊", count: 0 },
+      //   { root: true }
+      // );
     })
     .catch((error) => {
       if (error.response.status == 422) {
@@ -92,7 +93,7 @@ export const updateUser = ({ commit, dispatch }, data) => {
       if (error.response.status === 419) {
         commit("SET_AUTHENTICATED", false);
         commit("SET_AUTH_USER", null);
-        router.push({ name: "UserLogin" });
+        router.push({ name: "Login" });
       }
     });
 };
@@ -111,14 +112,11 @@ export const deleteUser = ({ commit, dispatch }, uId) => {
 };
 
 export const loginUser = ({ commit, dispatch }, formData) => {
-  console.log(formData);
-
   User.login(formData)
     .then((response) => {
       commit("SET_AUTHENTICATED", true);
-      commit("SET_AUTH_USER", response.data);
-      commit("SET_USER_ERROR", []);
-      router.push({ name: "UserDashboard" });
+      commit("SET_AUTH_USER", response.data.data);
+      router.push({ name: "user.dashboard" });
       dispatch(
         "addNotification",
         { type: "success", message: "Welcome to AAJExpress 😊", count: 0 },
@@ -126,10 +124,10 @@ export const loginUser = ({ commit, dispatch }, formData) => {
       );
     })
     .catch((error) => {
-      if (error.response.status == 422) {
+      if (error.response.status == 404) {
         commit("SET_AUTHENTICATED", false);
         commit("SET_AUTH_USER", null);
-        commit("SET_USER_ERROR", error.response.data.errors);
+        // commit("SET_USER_ERROR", error.response.data.errors);
         dispatch(
           "addNotification",
           { type: "danger", message: "Login Unsuccessful 😞", count: 0 },
@@ -139,8 +137,8 @@ export const loginUser = ({ commit, dispatch }, formData) => {
     });
 };
 
-export const logoutUser = ({ commit }) => {
-  User.logout()
+export const logoutUser = ({ commit }, data) => {
+  User.logout(data)
     .then(() => {
       commit("SET_AUTHENTICATED", false);
       commit("SET_AUTH_USER", null);
@@ -151,22 +149,7 @@ export const logoutUser = ({ commit }) => {
       if (error.response.status === 419 || error.response.status == 422) {
         commit("SET_AUTHENTICATED", false);
         commit("SET_AUTH_USER", null);
-        router.push({ name: "UserLogin" });
-      }
-    });
-};
-
-export const getAuthUser = ({ commit }) => {
-  User.auth()
-    .then((response) => {
-      commit("SET_AUTHENTICATED", true);
-      commit("SET_AUTH_USER", response.data);
-    })
-    .catch((error) => {
-      if (error.response.status === 401) {
-        commit("SET_AUTHENTICATED", false);
-        commit("SET_AUTH_USER", null);
-        router.push({ name: "UserLogin" });
+        router.push({ name: "Login" });
       }
     });
 };

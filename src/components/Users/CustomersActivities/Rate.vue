@@ -4,7 +4,7 @@
       <form>
         <div class="rate-wrap">
           <div class="origin">
-            <h2><u>Where are you shipping from?</u></h2>
+            <h2>Where are you shipping from?</h2>
             <div class="grid originating">
               <div>
                 <div class="user-box">
@@ -12,6 +12,7 @@
                     type="text"
                     v-model.trim.lazy="v$.form.originatingCountry.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.originatingCountry.$error }"
                   />
                   <label for="">Country:</label>
                 </div>
@@ -30,6 +31,7 @@
                     type="number"
                     v-model.trim.lazy="v$.form.weight.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.weight.$error }"
                   />
                   <label for="">Weight (Kg):</label>
                 </div>
@@ -49,6 +51,7 @@
                     type="text"
                     v-model.trim.lazy="v$.form.originatingState.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.originatingState.$error }"
                   />
                   <label for="">State:</label>
                 </div>
@@ -67,6 +70,7 @@
                     type="number"
                     v-model.trim.lazy="v$.form.originatingCity.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.originatingCity.$error }"
                   />
                   <label for="">City:</label>
                 </div>
@@ -82,13 +86,14 @@
           </div>
 
           <div class="destination">
-            <h2><u>Where are you shipping to?</u></h2>
+            <h2>Where are you shipping to?</h2>
             <div>
               <div class="user-box">
                 <input
                   type="text"
                   v-model.trim.lazy="v$.form.destinationCountry.$model"
                   required="required"
+                  :class="{ 'error-msg': v$.form.destinationCountry.$error }"
                 />
                 <label for="">Country:</label>
               </div>
@@ -109,6 +114,7 @@
                     type="text"
                     v-model.trim.lazy="v$.form.destinationState.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.destinationState.$error }"
                   />
                   <label for="">State:</label>
                 </div>
@@ -127,6 +133,7 @@
                     type="number"
                     v-model.trim.lazy="v$.form.destinationCity.$model"
                     required="required"
+                    :class="{ 'error-msg': v$.form.destinationCity.$error }"
                   />
                   <label for="">City:</label>
                 </div>
@@ -141,6 +148,7 @@
             </div>
           </div>
         </div>
+        <!-- <pre>{{ v$ }}</pre> -->
 
         <button type="submit" @click="getRate">
           <span></span>
@@ -325,7 +333,7 @@ export default {
 }
 
 .error-msg {
-  border-color: #dc3545;
+  border-color: #dc3545 !important;
   color: #dc3545;
   font-size: 0.7rem;
 }

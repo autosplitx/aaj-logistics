@@ -5,6 +5,11 @@ import router from "./router";
 import store from "./store";
 
 import VueProgressBar from "@aacassandra/vue3-progressbar";
+// import VueSidebarMenu from 'vue-sidebar-menu'
+// import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+
+import VueStepWizard from "vue-step-wizard";
+import "vue-step-wizard/dist/vue-step-wizard.css";
 
 const options = {
   position: "fixed",
@@ -26,4 +31,6 @@ createApp(App)
   .use(store)
   .use(router)
   .use(VueProgressBar, options)
+  .use(VueStepWizard)
+  // .use(VueSidebarMenu)
   .mount("#app");

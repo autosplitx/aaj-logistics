@@ -6,7 +6,7 @@ import Transaction from "../views/Transaction";
 import User from "../views/User.vue";
 import Dashboard from "../components/Users/Dashboard.vue";
 import RequestPayment from "../components/Users/CustomersActivities/RequestPayment.vue";
-import Rate from "../components/Users/CustomersActivities/Rate.vue";
+import Rate from "../components/Users/CustomersActivities/Rate/Rate.vue";
 import Wallet from "../components/Users/CustomersActivities/Wallet.vue";
 import TopUpWallet from "../components/Users/CustomersActivities/TopUpWallet.vue";
 

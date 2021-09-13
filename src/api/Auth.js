@@ -1,6 +1,6 @@
 import Api from "./Api";
 
-const END_POINT = "v1/users";
+const END_POINT = "v1/auth";
 
 export default {
   all() {
@@ -29,14 +29,22 @@ export default {
   },
 
   async login(data) {
-    // return Api.post("/v1/users/login-api.php", data);
-    // return Api.post("v1/login", data);
-    return Api.post("process_api.php", data);
+    return Api.post(`${END_POINT}/login.php`, data);
   },
 
-  async logout(data) {
-    return Api.post("process_api.php", data);
+  async logout() {
+    return Api.post(`${END_POINT}/logout.php`);
   },
+
+  // async login(data) {
+  //   // return Api.post("/v1/users/login-api.php", data);
+  //   // return Api.post("v1/login", data);
+  //   return Api.post("login_api.php", data);
+  // },
+
+  // async logout(data) {
+  //   return Api.post("process_api.php", data);
+  // },
 
   // auth() {
   //   return Api.get("v1/user");

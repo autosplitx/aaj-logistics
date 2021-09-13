@@ -114,6 +114,7 @@ export const deleteUser = ({ commit, dispatch }, uId) => {
 export const loginUser = ({ commit, dispatch }, formData) => {
   User.login(formData)
     .then((response) => {
+      console.log(response.data);
       commit("SET_AUTHENTICATED", true);
       commit("SET_AUTH_USER", response.data.data);
       router.push({ name: "user.dashboard" });
@@ -137,8 +138,8 @@ export const loginUser = ({ commit, dispatch }, formData) => {
     });
 };
 
-export const logoutUser = ({ commit }, data) => {
-  User.logout(data)
+export const logoutUser = ({ commit }) => {
+  User.logout()
     .then(() => {
       commit("SET_AUTHENTICATED", false);
       commit("SET_AUTH_USER", null);

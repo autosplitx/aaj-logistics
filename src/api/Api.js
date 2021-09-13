@@ -6,6 +6,6 @@ const Api = axios.create({
   // baseURL: "http://localhost/api-jwt",
 });
 
-// Api.defaults.withCredentials = true;
+Api.withCredentials = true;
 
 export default Api;

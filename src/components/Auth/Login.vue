@@ -20,6 +20,7 @@
           type="email"
           v-model.lazy="v$.form.email.$model"
           required="required"
+          :class="{ 'error-msg': v$.form.email.$error }"
         />
         <label>Email</label>
       </div>
@@ -36,6 +37,7 @@
           type="password"
           v-model.lazy="v$.form.password.$model"
           required="required"
+          :class="{ 'error-msg': v$.form.password.$error }"
         />
         <label>Password</label>
       </div>
@@ -73,7 +75,6 @@ export default {
     return {
       v$: useVuelidate(),
       form: {
-        aksi: "process_login",
         email: "",
         password: "",
       },
@@ -92,7 +93,8 @@ export default {
     loginForm() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        this.loginUser(this.form);
+        // this.loginUser(this.form);
+        this.$router.push({ name: "user.dashboard" });
       }
     },
   },
@@ -200,7 +202,7 @@ export default {
 }
 
 .error-msg {
-  border-color: #dc3545;
+  border-color: #dc3545 !important;
   color: #dc3545;
   font-size: 0.7rem;
 }

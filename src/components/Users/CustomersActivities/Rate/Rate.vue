@@ -1,20 +1,28 @@
 <template>
   <div class="container">
     <div class="request-wrap">
-      <form>
+      <form @submit.prevent="getRate">
         <div class="rate-wrap">
           <div class="origin">
             <h2>Where are you shipping from?</h2>
             <div class="grid originating">
               <div>
                 <div class="user-box">
-                  <input
-                    type="text"
+                  <select
                     v-model.trim.lazy="v$.form.originatingCountry.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.originatingCountry.$error }"
-                  />
-                  <label for="">Country:</label>
+                    @change="getCountryId('origin')"
+                  >
+                    <option value="" disabled selected>-select country-</option>
+                    <option
+                      :value="country.id"
+                      v-for="country in countries.data"
+                      :key="country.id"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
                 </div>
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
                 <div
@@ -22,14 +30,15 @@
                   v-for="(error, index) of v$.form.originatingCountry.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
+
               <div>
                 <div class="user-box">
                   <input
                     type="number"
-                    v-model.trim.lazy="v$.form.weight.$model"
+                    v-model.trim.number.lazy="v$.form.weight.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.weight.$error }"
                   />
@@ -40,20 +49,31 @@
                   v-for="(error, index) of v$.form.weight.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
             </div>
+
             <div class="grid">
               <div>
                 <div class="user-box">
-                  <input
-                    type="text"
+                  <select
                     v-model.trim.lazy="v$.form.originatingState.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.originatingState.$error }"
-                  />
-                  <label for="">State:</label>
+                    @change="getStateId('origin')"
+                  >
+                    <option value="" disabled selected>-select state-</option>
+                    <template v-if="isOriginCountryChanged">
+                      <option
+                        :value="state.id"
+                        v-for="state in states.data"
+                        :key="state.id"
+                      >
+                        {{ state.name }}
+                      </option>
+                    </template>
+                  </select>
                 </div>
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
                 <div
@@ -61,25 +81,35 @@
                   v-for="(error, index) of v$.form.originatingState.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
+
               <div>
                 <div class="user-box">
-                  <input
-                    type="number"
+                  <select
                     v-model.trim.lazy="v$.form.originatingCity.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.originatingCity.$error }"
-                  />
-                  <label for="">City:</label>
+                  >
+                    <option value="" disabled selected>-select city-</option>
+                    <template v-if="isOriginStateChanged">
+                      <option
+                        :value="city.id"
+                        v-for="city in cities.data"
+                        :key="city.id"
+                      >
+                        {{ city.name }}
+                      </option>
+                    </template>
+                  </select>
                 </div>
                 <div
                   class="input-errors"
                   v-for="(error, index) of v$.form.originatingCity.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
             </div>
@@ -89,13 +119,21 @@
             <h2>Where are you shipping to?</h2>
             <div>
               <div class="user-box">
-                <input
-                  type="text"
+                <select
                   v-model.trim.lazy="v$.form.destinationCountry.$model"
                   required="required"
                   :class="{ 'error-msg': v$.form.destinationCountry.$error }"
-                />
-                <label for="">Country:</label>
+                  @change="getCountryId('dest')"
+                >
+                  <option value="" disabled selected>-select country-</option>
+                  <option
+                    :value="country.id"
+                    v-for="country in countries.data"
+                    :key="country.id"
+                  >
+                    {{ country.name }}
+                  </option>
+                </select>
               </div>
               <div class="pre-icon os-icon os-icon-user-male-circle"></div>
               <div
@@ -103,20 +141,30 @@
                 v-for="(error, index) of v$.form.destinationCountry.$errors"
                 :key="index"
               >
-                <div class="error-msg">{{ error.$message }}</div>
+                <div class="error-msg-text">{{ error.$message }}</div>
               </div>
             </div>
 
             <div class="grid">
               <div>
                 <div class="user-box">
-                  <input
-                    type="text"
+                  <select
                     v-model.trim.lazy="v$.form.destinationState.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.destinationState.$error }"
-                  />
-                  <label for="">State:</label>
+                    @change="getStateId('dest')"
+                  >
+                    <option value="" disabled selected>-select state-</option>
+                    <template v-if="isDestCountryChanged">
+                      <option
+                        :value="state.id"
+                        v-for="state in destStates.data"
+                        :key="state.id"
+                      >
+                        {{ state.name }}
+                      </option>
+                    </template>
+                  </select>
                 </div>
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
                 <div
@@ -124,33 +172,41 @@
                   v-for="(error, index) of v$.form.destinationState.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
               <div>
                 <div class="user-box">
-                  <input
-                    type="number"
+                  <select
                     v-model.trim.lazy="v$.form.destinationCity.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.destinationCity.$error }"
-                  />
-                  <label for="">City:</label>
+                  >
+                    <option value="" disabled selected>-select city-</option>
+                    <template v-if="isDestStateChanged">
+                      <option
+                        :value="city.id"
+                        v-for="city in destCities.data"
+                        :key="city.id"
+                      >
+                        {{ city.name }}
+                      </option>
+                    </template>
+                  </select>
                 </div>
                 <div
                   class="input-errors"
                   v-for="(error, index) of v$.form.destinationCity.$errors"
                   :key="index"
                 >
-                  <div class="error-msg">{{ error.$message }}</div>
+                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- <pre>{{ v$ }}</pre> -->
 
-        <button type="submit" @click="getRate">
+        <button type="submit">
           <span></span>
           <span></span>
           <span></span>
@@ -163,6 +219,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 
@@ -182,20 +239,60 @@ export default {
         destinationCity: "",
         weight: "",
       },
-      submitted: false,
+
+      isOriginCountryChanged: false,
+      isOriginStateChanged: false,
+      isDestCountryChanged: false,
+      isDestStateChanged: false,
     };
   },
 
+  computed: {
+    ...mapGetters("location", [
+      "countries",
+      "states",
+      "cities",
+      "destCountries",
+      "destStates",
+      "destCities",
+    ]),
+  },
+
   methods: {
+    ...mapActions("location", ["getCountries", "getStates", "getCities"]),
+
+    getCountryId: function (source) {
+      if (source == "origin") {
+        this.getStates([this.form.originatingCountry, source]);
+        this.isOriginCountryChanged = true;
+      } else {
+        this.getStates([this.form.destinationCountry, source]);
+        this.isDestCountryChanged = true;
+      }
+    },
+
+    getStateId: function (source) {
+      if (source == "origin") {
+        this.getCities([this.form.originatingState, source]);
+        this.isOriginStateChanged = true;
+      } else {
+        this.getCities([this.form.destinationState, source]);
+        this.isDestStateChanged = true;
+      }
+    },
+
     getRate() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        alert("Form successfully submitted.");
         console.log(this.form);
       } else {
         // alert("Please fill out all the required field..!");
       }
     },
+  },
+
+  mounted() {
+    this.getCountries();
   },
 
   validations() {
@@ -255,7 +352,8 @@ export default {
 .request-wrap .user-box {
   position: relative;
 }
-.request-wrap .user-box input {
+.request-wrap .user-box input,
+select {
   width: 100%;
   padding: 0.5rem 0;
   font-size: 1rem;
@@ -334,6 +432,8 @@ export default {
 
 .error-msg {
   border-color: #dc3545 !important;
+}
+.error-msg-text {
   color: #dc3545;
   font-size: 0.7rem;
 }

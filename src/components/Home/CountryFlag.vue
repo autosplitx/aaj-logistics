@@ -1,67 +1,6 @@
 <template>
-  <div class="country-flag">
-    <div class="bearer">
-      <div class="flex container">
-        <div>
-          <img src="/img/aaj/flag-nigeria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-austria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-argentina.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-belgium.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/france-flag.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-america.gif" alt="Bearer Flag" />
-        </div>
-      </div>
-    </div>
-
-    <div class="bearer">
-      <div class="flex container">
-        <div>
-          <img src="/img/aaj/flag-nigeria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-austria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-argentina.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-belgium.gif" alt="Bearer Flag" />
-        </div>
-      </div>
-    </div>
-
-    <div class="bearer">
-      <div class="flex container">
-        <div>
-          <img src="/img/aaj/flag-nigeria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-austria.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-argentina.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-belgium.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/france-flag.gif" alt="Bearer Flag" />
-        </div>
-        <div>
-          <img src="/img/aaj/flag-america.gif" alt="Bearer Flag" />
-        </div>
-      </div>
-    </div>
+  <div class="bearer">
+    <!-- <img src="/img/aaj/hero.jpg" alt="Bearer Flag" /> -->
   </div>
 </template>
 
@@ -70,19 +9,14 @@ export default {};
 </script>
 
 <style scoped>
-.country-flag {
-  padding: 0 0.8rem 3rem;
-  background-color: #fff;
-}
-.bearer .flex {
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.bearer img {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.bearer {
+  background-image: url("/img/aaj/hero.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  object-fit: cover;
+  width: 100%;
+  height: 60vh;
 }
 
 @media (min-width: 320px) {
@@ -95,13 +29,6 @@ export default {};
 
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-  .country-flag {
-    padding: 0 1rem 3rem;
-  }
-  .bearer img {
-    width: 80px;
-    height: 80px;
-  }
 }
 
 @media (min-width: 961px) {
@@ -110,9 +37,6 @@ export default {};
 
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
-  .country-flag {
-    padding: 0 0 5rem;
-  }
 }
 
 @media (min-width: 1281px) {

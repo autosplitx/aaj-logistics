@@ -1,14 +1,37 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store";
 
-import Home from "../views/Home.vue";
-import Registration from "../views/Registration.vue";
-import Transaction from "../views/Transaction";
-import User from "../views/User.vue";
-import Dashboard from "../components/Users/Dashboard.vue";
-import RequestPayment from "../components/Users/CustomersActivities/RequestPayment.vue";
-import Rate from "../components/Users/CustomersActivities/Rate/Rate.vue";
-import Wallet from "../components/Users/CustomersActivities/Wallet.vue";
-import TopUpWallet from "../components/Users/CustomersActivities/TopUpWallet.vue";
+const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
+const Registration = () =>
+  import(/* webpackChunkName: "registration" */ "@/views/Registration.vue");
+const Transaction = () =>
+  import(/* webpackChunkName: "transaction" */ "@/views/Transaction");
+const User = () => import(/* webpackChunkName: "user" */ "@/views/User.vue");
+const Dashboard = () =>
+  import(
+    /* webpackChunkName: "dashboard" */ "@/components/Users/Dashboard.vue"
+  );
+const RequestPayment = () =>
+  import(
+    /* webpackChunkName: "request-payment" */ "@/components/Users/CustomersActivities/RequestPayment.vue"
+  );
+const Rate = () =>
+  import(
+    /* webpackChunkName: "rate" */ "@/components/Users/CustomersActivities/Rate.vue"
+  );
+const Wallet = () =>
+  import(
+    /* webpackChunkName: "wallet" */ "@/components/Users/CustomersActivities/Wallet.vue"
+  );
+const TopUpWallet = () =>
+  import(
+    /* webpackChunkName: "top-up-wallet" */ "@/components/Users/CustomersActivities/TopUpWallet.vue"
+  );
+
+const ForgotPassword = () =>
+  import(
+    /* webpackChunkName: "forgot-password" */ "@/components/Auth/ForgotPassword.vue"
+  );
 
 const routes = [
   {
@@ -62,10 +85,7 @@ const routes = [
   {
     path: "/forgot-password",
     name: "ForgotPassword",
-    component: () =>
-      import(
-        /* webpackChunkName: "forgot-password" */ "../components/Auth/ForgotPassword.vue"
-      ),
+    component: ForgotPassword,
     meta: {
       title: "Reset Password | AAJExpress",
       metaTags: [
@@ -84,17 +104,8 @@ const routes = [
     path: "/user",
     component: User,
     meta: {
+      adminAuth: true,
       title: "User - AAJExpress",
-      metaTags: [
-        {
-          name: "description",
-          content: "The user's page of AAJExpress.",
-        },
-        {
-          property: "og:description",
-          content: "The user's page of AAJExpress.",
-        },
-      ],
     },
     children: [
       {
@@ -195,41 +206,11 @@ const routes = [
           ],
         },
       },
-      // {
-      //   path: "products",
-      //   component: Products,
-      //   children: [
-      //     {
-      //       path: "",
-      //       name: "admin.products",
-      //       component: ProductTable,
-      //       meta: {
-      //         title: "Admin | Products - AAJExpress",
-      //       },
-      //     },
-      //     {
-      //       path: "images",
-      //       name: "products.images",
-      //       component: ProductImages,
-      //       meta: {
-      //         title: "Admin | Product Images - AAJExpress",
-      //       },
-      //     },
-      //     {
-      //       path: "tags",
-      //       name: "products.tags",
-      //       component: Tags,
-      //       meta: {
-      //         title: "Admin | Product Tags - AAJExpress",
-      //       },
-      //     },
-      //   ],
-      // },
     ],
   },
 
   {
-    path: "/:pathMatch(.*)*",
+    path: "/:catchAll(.*)",
     component: () => import("../components/NotFound.vue"),
     meta: {
       title: "Error 404 | AAJExpress",
@@ -265,6 +246,32 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  function isLoggedIn() {
+    let authUser = store.getters["auth/authenticated"];
+    return authUser;
+  }
+  if (to.matched.some((record) => record.meta.adminAuth)) {
+    if (!isLoggedIn()) {
+      next({
+        path: "/registration",
+        query: { redirect: from.fullPath },
+      });
+    }
+    // else {
+    //   next();
+    // }
+  }
+  // else if (to.matched.some((record) => record.meta.guestAuth)) {
+  //   if (isLoggedIn()) {
+  //     next({
+  //       path: "/",
+  //       query: { redirect: to.fullPath },
+  //     });
+  //   } else {
+  //     next();
+  //   }
+  // }
+
   /* ---------------------------------------------//? SEO Friendly META -------------------------------------------- */
 
   const nearestWithTitle = to.matched

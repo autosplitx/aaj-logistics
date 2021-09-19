@@ -3,6 +3,9 @@ import createPersistedState from "vuex-persistedstate";
 
 import auth from "./modules/auth";
 import location from "./modules/location";
+import rate from "./modules/rate";
+import transaction from "./modules/transaction";
+import wallet from "./modules/wallet";
 
 // const state = {};
 // const actions = {};
@@ -14,7 +17,13 @@ import * as getters from "./getters";
 import * as mutations from "./mutations";
 import * as actions from "./actions";
 
-const modules = { auth: auth, location: location };
+const modules = {
+  auth: auth,
+  location: location,
+  rate: rate,
+  transaction: transaction,
+  wallet: wallet,
+};
 
 export default createStore({
   state,

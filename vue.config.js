@@ -1,8 +1,8 @@
 module.exports = {
   pwa: {
     name: "AAJ-Express",
-    shortName: "AAJ",
-    startURL: "index.html",
+    short_name: "AAJ",
+    start_url: "/index.html",
     themeColor: "#DA532C",
     msTileColor: "#000000",
     appleMobileWebAppCapable: "yes",

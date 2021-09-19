@@ -1,10 +1,69 @@
 <template>
   <div class="container">
+    <Modal :open="isOpen">
+      <template v-slot:modalHeader>
+        <img src="/img/aaj/logo.png" class="logo" />
+        <button type="button" class="close" @click="close">×</button>
+      </template>
+
+      <template v-slot:default v-if="rate != null">
+        <h3 class="text-center">
+          <span>{{ rate.weight }} Kg</span> @
+          <span>₦{{ new Intl.NumberFormat().format(rate.price) }}</span>
+        </h3>
+        <h5 class="modal-title text-center">
+          The above rates presented are estimates and may be adjusted when the
+          package is picked up
+        </h5>
+      </template>
+
+      <template v-slot:modalFooter>
+        <button type="button" class="btn bg-blue" @click="close">Close</button>
+      </template>
+    </Modal>
+
     <div class="request-wrap">
-      <form @submit.prevent="getRate">
+      <form @submit.prevent="rateForm">
         <div class="rate-wrap">
           <div class="origin">
+            <div class="grid mt-2">
+              <div>
+                <div class="user-box">
+                  <select
+                    v-model.trim.lazy="v$.form.serviceType.$model"
+                    required="required"
+                    :class="{ 'error-msg': v$.form.serviceType.$error }"
+                  >
+                    <option value="" disabled selected>
+                      -select service type-
+                    </option>
+                    <option value="1">Office Drop-off</option>
+                    <option value="2">Pick-up &amp; Delivery</option>
+                  </select>
+                </div>
+                <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+                <div
+                  class="input-errors"
+                  v-for="(error, index) of v$.form.serviceType.$errors"
+                  :key="index"
+                >
+                  <div class="error-msg-text">{{ error.$message }}</div>
+                </div>
+              </div>
+
+              <div>
+                <div class="user-box">
+                  <select v-model.trim.lazy="form.priority">
+                    <option value="" disabled selected>-priority-</option>
+                    <option value="1">Standard</option>
+                    <option value="2">Urgent</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
             <h2>Where are you shipping from?</h2>
+
             <div class="grid originating">
               <div>
                 <div class="user-box">
@@ -37,8 +96,8 @@
               <div>
                 <div class="user-box">
                   <input
-                    type="number"
-                    v-model.trim.number.lazy="v$.form.weight.$model"
+                    type="text"
+                    v-model.trim.lazy="v$.form.weight.$model"
                     required="required"
                     :class="{ 'error-msg': v$.form.weight.$error }"
                   />
@@ -87,11 +146,7 @@
 
               <div>
                 <div class="user-box">
-                  <select
-                    v-model.trim.lazy="v$.form.originatingCity.$model"
-                    required="required"
-                    :class="{ 'error-msg': v$.form.originatingCity.$error }"
-                  >
+                  <select v-model.trim.lazy="form.originatingCity">
                     <option value="" disabled selected>-select city-</option>
                     <template v-if="isOriginStateChanged">
                       <option
@@ -103,13 +158,6 @@
                       </option>
                     </template>
                   </select>
-                </div>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.originatingCity.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
             </div>
@@ -127,7 +175,7 @@
                 >
                   <option value="" disabled selected>-select country-</option>
                   <option
-                    :value="country.id"
+                    :value="`${country.id}`"
                     v-for="country in countries.data"
                     :key="country.id"
                   >
@@ -175,13 +223,10 @@
                   <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
+
               <div>
                 <div class="user-box">
-                  <select
-                    v-model.trim.lazy="v$.form.destinationCity.$model"
-                    required="required"
-                    :class="{ 'error-msg': v$.form.destinationCity.$error }"
-                  >
+                  <select v-model.trim.lazy="form.destinationCity">
                     <option value="" disabled selected>-select city-</option>
                     <template v-if="isDestStateChanged">
                       <option
@@ -193,13 +238,6 @@
                       </option>
                     </template>
                   </select>
-                </div>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.destinationCity.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg-text">{{ error.$message }}</div>
                 </div>
               </div>
             </div>
@@ -219,18 +257,23 @@
 </template>
 
 <script>
+import Modal from "../../ModalComp.vue";
 import { mapGetters, mapActions } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 
 export default {
   name: "Rate",
+  components: { Modal },
 
   data() {
     return {
       v$: useVuelidate(),
 
       form: {
+        inter: "inter",
+        priority: "",
+        serviceType: "",
         originatingCountry: "",
         originatingState: "",
         originatingCity: "",
@@ -244,6 +287,8 @@ export default {
       isOriginStateChanged: false,
       isDestCountryChanged: false,
       isDestStateChanged: false,
+
+      isOpen: false,
     };
   },
 
@@ -256,10 +301,19 @@ export default {
       "destStates",
       "destCities",
     ]),
+    ...mapGetters("rate", ["rate"]),
   },
 
   methods: {
     ...mapActions("location", ["getCountries", "getStates", "getCities"]),
+    ...mapActions("rate", ["getRate"]),
+
+    rateForm() {
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        this.getRate(this.form);
+      }
+    },
 
     getCountryId: function (source) {
       if (source == "origin") {
@@ -281,12 +335,17 @@ export default {
       }
     },
 
-    getRate() {
-      this.v$.$validate();
-      if (!this.v$.$error) {
-        console.log(this.form);
+    close: function () {
+      this.isOpen = !this.isOpen;
+    },
+  },
+
+  watch: {
+    rate(val) {
+      if (val.price != "") {
+        this.isOpen = true;
       } else {
-        // alert("Please fill out all the required field..!");
+        this.isOpen = false;
       }
     },
   },
@@ -298,6 +357,12 @@ export default {
   validations() {
     return {
       form: {
+        serviceType: {
+          required: helpers.withMessage(
+            "Service type may not be empty",
+            required
+          ),
+        },
         originatingCountry: {
           required: helpers.withMessage("Country may not be empty", required),
         },
@@ -307,17 +372,11 @@ export default {
         originatingState: {
           required: helpers.withMessage("State may not be empty", required),
         },
-        originatingCity: {
-          required: helpers.withMessage("City may not be empty", required),
-        },
         destinationCountry: {
           required: helpers.withMessage("Country may not be empty", required),
         },
         destinationState: {
           required: helpers.withMessage("State may not be empty", required),
-        },
-        destinationCity: {
-          required: helpers.withMessage("Weight may not be empty", required),
         },
       },
     };
@@ -326,6 +385,19 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 60px;
+  display: block;
+}
+.modal h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.modal h5 {
+  font-size: 1rem;
+  color: var(--aaj-blue-h1);
+}
 .originating {
   grid-template-columns: 2fr 1fr;
 }
@@ -336,9 +408,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
   width: 100%;
   padding: 0 0.5rem;
+  margin: 0 0 3rem;
   border-radius: 10px;
 }
 
@@ -442,13 +514,21 @@ select {
   margin-top: -20px;
 }
 
+@media (min-width: 320px) {
+  .modal h3 {
+    font-size: 1.5rem;
+  }
+  .modal h5 {
+    font-size: 0.7rem;
+  }
+}
+
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   .request-wrap {
     display: block;
     width: 80%;
-    margin: 3rem auto 0;
-    border-radius: 10px;
+    margin: 3rem auto;
   }
 
   .origin,
@@ -476,9 +556,14 @@ select {
 }
 
 @media (min-width: 1025px) {
+  .modal h3 {
+    font-size: 2.5rem;
+  }
+  .modal h5 {
+    font-size: 1.1rem;
+  }
   .request-wrap {
     display: flex;
-    height: 70vh;
     width: 100%;
   }
   .rate-wrap {

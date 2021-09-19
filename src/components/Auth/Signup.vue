@@ -185,7 +185,6 @@ export default {
       v$: useVuelidate(),
 
       form: {
-        aksi: "process_register",
         first_name: "",
         last_name: "",
         country: "",
@@ -213,6 +212,19 @@ export default {
         this.addUser(this.form);
         this.reset();
       }
+    },
+
+    reset() {
+      this.form = {
+        first_name: "",
+        last_name: "",
+        country: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+        refcode: "",
+      };
     },
   },
 
@@ -277,19 +289,6 @@ export default {
           ),
         },
       },
-    };
-  },
-
-  reset() {
-    this.form = {
-      first_name: "",
-      last_name: "",
-      country: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-      refcode: "",
     };
   },
 };

@@ -93,8 +93,8 @@ export default {
     loginForm() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        // this.loginUser(this.form);
-        this.$router.push({ name: "user.dashboard" });
+        this.loginUser(this.form);
+        // this.$router.push({ name: "user.dashboard" });
       }
     },
   },

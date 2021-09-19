@@ -21,7 +21,7 @@
                 <p>Bonuses</p>
               </div>
               <div class="">
-                <span>544</span>
+                <span>{{ new Intl.NumberFormat().format(wallet.balance) }}</span>
                 <p>Deposit</p>
               </div>
             </div>
@@ -101,6 +101,7 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment";
+
 export default {
   name: "Dashboard",
 
@@ -129,6 +130,7 @@ export default {
   computed: {
     ...mapGetters({
       user: "auth/user",
+      wallet: "wallet/wallets",
     }),
 
     fullName: function () {
@@ -199,6 +201,7 @@ export default {
 .customer-content {
   padding: 0 1rem;
   margin-top: 5rem;
+  margin-bottom: 1rem;
 }
 .content-item {
   text-transform: uppercase;

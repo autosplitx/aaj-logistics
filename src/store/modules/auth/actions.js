@@ -21,54 +21,77 @@ export const getUser = ({ commit }, uId) => {
     });
 };
 
-export const storeUser = ({ commit, dispatch }, formData) => {
-  User.store(formData)
-    .then(() => {
-      commit("SET_USER_ERROR", []);
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*          //TODO: Action is used to create GUEST from application & can later be assigned ROLE by the ADMIN         */
+/* ------------------------------------------------------------------------------------------------------------------ */
+export const loginUser = ({ commit, dispatch }, formData) => {
+  // this.$Progress.start();
+  User.login(formData)
+    .then((response) => {
+      commit("SET_AUTHENTICATED", true);
+      commit("SET_AUTH_USER", response.data.data);
+      // this.$Progress.finish();
+      router.push({ name: "user.dashboard" });
       dispatch(
         "addNotification",
-        { type: "success", message: "User created successfully 😊", count: 0 },
+        { type: "success", message: "Welcome to AAJExpress 😊", count: 0 },
         { root: true }
       );
-      User.all().then((response) => {
-        commit("SET_USERS", response.data);
-      });
     })
     .catch((error) => {
-      if (error.response.status == 422) {
-        commit("SET_USER_ERROR", error.response.data.errors);
+      if (error.response.status == 404) {
+        commit("SET_AUTHENTICATED", false);
+        commit("SET_AUTH_USER", null);
+        // commit("SET_USER_ERROR", error.response.data.errors);
+        // this.$Progress.fail();
         dispatch(
           "addNotification",
-          {
-            type: "danger",
-            message: "Something went wrong! Try again. 😞",
-            count: 0,
-          },
+          { type: "danger", message: "Login Unsuccessful 😞", count: 0 },
           { root: true }
         );
       }
     });
 };
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-/*          //TODO: Action is used to create GUEST from application & can later be assigned ROLE by the ADMIN         */
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-export const addUser = ({ commit }, formData) => {
-  console.log(formData);
-  User.register(formData)
+export const logoutUser = ({ commit }) => {
+  User.logout()
     .then(() => {
+      commit("SET_AUTHENTICATED", false);
+      commit("SET_AUTH_USER", null);
       commit("SET_USER_ERROR", []);
       router.push({ name: "Home" });
-      // dispatch(
-      //   "addNotification",
-      //   { type: "success", message: "Registration Completed 😊", count: 0 },
-      //   { root: true }
-      // );
+    })
+    .catch((error) => {
+      if (error.response.status === 419 || error.response.status == 422) {
+        commit("SET_AUTHENTICATED", false);
+        commit("SET_AUTH_USER", null);
+        router.push({ name: "Login" });
+      }
+    });
+};
+
+export const addUser = ({ commit, dispatch }, formData) => {
+  User.register(formData)
+    .then((response) => {
+      commit("SET_USER_ERROR", []);
+      router.push({ name: "Home" });
+      dispatch(
+        "addNotification",
+        { type: "success", message: `${response.data.data} 😊`, count: 0 },
+        { root: true }
+      );
     })
     .catch((error) => {
       if (error.response.status == 422) {
-        commit("SET_USER_ERROR", error.response.data.errors);
+        dispatch(
+          "addNotification",
+          {
+            type: "danger",
+            message: `${error.response.data.errors} 😞`,
+            count: 0,
+          },
+          { root: true }
+        );
       }
     });
 };
@@ -109,50 +132,6 @@ export const deleteUser = ({ commit, dispatch }, uId) => {
       commit("SET_USERS", response.data);
     });
   });
-};
-
-export const loginUser = ({ commit, dispatch }, formData) => {
-  User.login(formData)
-    .then((response) => {
-      console.log(response.data);
-      commit("SET_AUTHENTICATED", true);
-      commit("SET_AUTH_USER", response.data.data);
-      router.push({ name: "user.dashboard" });
-      dispatch(
-        "addNotification",
-        { type: "success", message: "Welcome to AAJExpress 😊", count: 0 },
-        { root: true }
-      );
-    })
-    .catch((error) => {
-      if (error.response.status == 404) {
-        commit("SET_AUTHENTICATED", false);
-        commit("SET_AUTH_USER", null);
-        // commit("SET_USER_ERROR", error.response.data.errors);
-        dispatch(
-          "addNotification",
-          { type: "danger", message: "Login Unsuccessful 😞", count: 0 },
-          { root: true }
-        );
-      }
-    });
-};
-
-export const logoutUser = ({ commit }) => {
-  User.logout()
-    .then(() => {
-      commit("SET_AUTHENTICATED", false);
-      commit("SET_AUTH_USER", null);
-      commit("SET_USER_ERROR", []);
-      router.push({ name: "Home" });
-    })
-    .catch((error) => {
-      if (error.response.status === 419 || error.response.status == 422) {
-        commit("SET_AUTHENTICATED", false);
-        commit("SET_AUTH_USER", null);
-        router.push({ name: "Login" });
-      }
-    });
 };
 
 export const getPagination = ({ commit }, page) => {

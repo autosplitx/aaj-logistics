@@ -51,7 +51,7 @@ export default {
   position: fixed;
   bottom: 10px;
   right: 15px;
-  width: 250px;
+  width: 330px;
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   padding: 1rem;

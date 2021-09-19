@@ -3,14 +3,20 @@
     <div class="container">
       <div class="balance">
         <div class="wallet-number">
-          <h4>Wallet Account</h4>
-          <h5>0123456789</h5>
+          <h4>Wallet Number</h4>
+          <template v-if="wallet">
+            <h5>{{ wallet.ref_no }}</h5>
+          </template>
+          <template v-else>
+            <h5>--- ---</h5>
+          </template>
         </div>
         <div class="wallet-balance">
           <h4>Wallet Balance</h4>
-          <h5>2,500</h5>
+          <h5>{{ new Intl.NumberFormat().format(wallet.balance) }}</h5>
         </div>
       </div>
+
       <div class="grid grid-3 my-2">
         <div class="">
           <!-- <div class="send">
@@ -18,6 +24,7 @@
             <h5>Send</h5>
           </div> -->
         </div>
+
         <div class="card">
           <router-link :to="{ name: 'user.topupwallet' }">
             <div class="top-up">
@@ -26,6 +33,7 @@
             </div>
           </router-link>
         </div>
+
         <div class="">
           <!-- <div class="pay">
             <img src="/img/aaj/pay.svg" alt="Pay" />
@@ -33,128 +41,84 @@
           </div> -->
         </div>
       </div>
+
       <div class="wallet-wrap">
         <div class="wallets">
           <div class="see-all">
             <h3>Last Transactions</h3>
             <a href="#">See all</a>
           </div>
-          <div class="card">
-            <h6>2021-09-02</h6>
-            <div class="accountDetails">
-              <h5 class="info">Top up</h5>
-              <h5 class="add">+200</h5>
-            </div>
-            <p>ref-no 010-abc-456</p>
-          </div>
-          <div class="card">
-            <h6>2021-09-06</h6>
-            <div class="accountDetails">
-              <h5 class="info">Transfer</h5>
-              <h5 class="subtract">-250</h5>
-            </div>
-            <p>ref-no 010-abc-456</p>
-          </div>
-          <div class="card">
-            <h6>2021-09-06</h6>
-            <div class="accountDetails">
-              <h5 class="info">Transfer</h5>
-              <h5 class="subtract">-450</h5>
-            </div>
-            <p>ref-no 010-abc-456</p>
-          </div>
-          <div class="card">
-            <h6>2021-09-06</h6>
-            <div class="accountDetails">
-              <h5 class="info">Top Up</h5>
-              <h5 class="add">+2,250</h5>
-            </div>
-            <p>ref-no 010-abc-456</p>
-          </div>
 
-          <!-- <form>
-            <div class="user-box">
-              <input
-                type="text"
-                v-model.trim.lazy="v$.form.userdetail.$model"
-                required="required"
-              />
-              <label for="">Email Or Phone number:</label>
+          <div class="card" v-for="transact in transactions" :key="transact.id">
+            <h6>{{ formatDate(transact.created_at) }}</h6>
+            <div class="accountDetails">
+              <!-- <h5 class="info">Info</h5> -->
+              <p><em>Waybill No:</em> {{ transact.waybill_no }}</p>
+              <h5 class="subtract" @click="close(transact.waybill_no)">
+                {{ new Intl.NumberFormat().format(transact.price) }}
+              </h5>
             </div>
-            <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-            <div
-              class="input-errors"
-              v-for="(error, index) of v$.form.userdetail.$errors"
-              :key="index"
-            >
-              <div class="error-msg">{{ error.$message }}</div>
-            </div>
-            <div class="grid">
-              <div>
-                <div class="user-box">
-                  <input
-                    type="text"
-                    v-model.trim.lazy="v$.form.country.$model"
-                    required="required"
-                  />
-                  <label for=""> Country:</label>
-                </div>
-                <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.country.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg">{{ error.$message }}</div>
-                </div>
-              </div>
-              <div>
-                <div class="user-box">
-                  <input
-                    type="number"
-                    v-model.trim.lazy="v$.form.amount.$model"
-                    required="required"
-                  />
-                  <label for="">Amount:</label>
-                </div>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.amount.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg">{{ error.$message }}</div>
-                </div>
-              </div>
-            </div>
-            <div class="grid">
-              <button type="submit" @click="submitRequest">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Request
-              </button>
-              <button type="submit" @click="submitSend">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Send
-              </button>
-            </div>
-          </form> -->
+            <!-- <p>
+              <em>Manifest No:</em>
+              <samp class="add">{{ transact.manifest_no }}</samp>
+            </p> -->
+          </div>
         </div>
       </div>
     </div>
+
+    <Modal :open="isOpen">
+      <template v-slot:modalHeader>
+        <img src="/img/aaj/logo.png" class="logo" />
+        <button type="button" class="close" @click="close">×</button>
+      </template>
+
+      <template v-slot:default v-if="transaction != null">
+        <h4 class="text-center">Transaction Details</h4>
+        <table
+          class="
+            table table-borderless table-striped table-hover table-responsive-sm
+          "
+        >
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Qty</th>
+              <th>Weight</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="detail in transaction" :key="detail.id">
+              <td>{{ detail.description }}</td>
+              <td>{{ detail.quantity }}</td>
+              <td>{{ detail.weight }}</td>
+              <td>
+                {{ new Intl.NumberFormat().format(detail.declared_total_cost) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template v-slot:modalFooter>
+        <button type="button" class="btn bg-blue" @click="close">Close</button>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script>
+import Modal from "../../ModalComp.vue";
+import { mapGetters, mapActions } from "vuex";
+import moment from "moment";
 import useVuelidate from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 
 export default {
   name: "Wallet",
+  components: { Modal },
 
   data() {
     return {
@@ -165,11 +129,24 @@ export default {
         country: "",
         amount: "",
       },
-      submitted: false,
+
+      isOpen: false,
     };
   },
 
+  computed: {
+    ...mapGetters({
+      transactions: "transaction/transactions",
+      transaction: "transaction/transaction",
+      user: "auth/user",
+      wallet: "wallet/wallets",
+    }),
+  },
+
   methods: {
+    ...mapActions("transaction", ["getTransactions", "getSingleTransaction"]),
+    ...mapActions("wallet", ["getWallet"]),
+
     submitRequest() {
       this.v$.$validate();
       if (!this.v$.$error) {
@@ -190,6 +167,22 @@ export default {
         // alert("Please fill out all the required field..!");
       }
     },
+
+    formatDate: function (params) {
+      return moment(params).format("MMM. Do, YYYY");
+    },
+
+    close: function (waybill) {
+      this.isOpen = !this.isOpen;
+      if (waybill != "") {
+        this.getSingleTransaction(waybill);
+      }
+    },
+  },
+
+  mounted() {
+    this.getTransactions(this.user.id);
+    this.getWallet(this.user.id);
   },
 
   validations() {
@@ -217,11 +210,32 @@ export default {
 </script>
 
 <style scoped>
+.trans {
+  margin: 1rem 0;
+}
+.logo {
+  width: 60px;
+  display: block;
+}
+.modal h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.modal h5 {
+  font-size: 1rem;
+  color: var(--aaj-blue-h1);
+}
+
 .add {
   color: var(--aaj-add);
 }
 .subtract {
   color: var(--aaj-subtract);
+}
+.subtract:hover {
+  font-weight: 700;
+  cursor: pointer;
 }
 .wallet-container {
   height: 43vh;
@@ -278,6 +292,10 @@ export default {
   font-size: 1rem;
   font-weight: 600;
 }
+.wallet-wrap h6 {
+  color: var(--aaj-gray-dark);
+  font-weight: 500;
+}
 .see-all {
   display: flex;
   justify-content: space-between;
@@ -311,6 +329,9 @@ export default {
 
 @media (min-width: 411px) {
   /* smartphones, iPhone, portrait 480x320 phones */
+  .trans {
+    width: 60%;
+  }
   .wallet-container {
     max-height: 34vh;
   }
@@ -318,6 +339,9 @@ export default {
 
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .trans {
+    width: 40%;
+  }
   .wallet-container {
     max-height: 30vh;
   }
@@ -373,6 +397,9 @@ export default {
 }
 
 @media (min-width: 1025px) {
+  .trans {
+    width: 30%;
+  }
   .wallet-container {
     height: 25vh;
   }
@@ -394,10 +421,6 @@ export default {
   }
   .wallet-wrap p {
     font-size: 1rem;
-  }
-  .wallet-wrap h6 {
-    color: var(--aaj-gray-dark);
-    font-weight: 500;
   }
 }
 </style>

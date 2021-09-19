@@ -30,6 +30,8 @@ workbox.routing.registerRoute(
   })
 );
 
+workbox.routing.registerNavigationRoute("/index.html");
+
 self.addEventListener("notificationclick", function (event) {
   const clickedNotification = event.showNotification;
   clickedNotification.close();
@@ -43,7 +45,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js"
 );
 
-importScripts("/precache-manifest.3c05635118d35ae431dad4e6ce8a8bd1.js");
+importScripts("/precache-manifest.0005505b799de86f6a4e2ca75dd29274.js");
 
 workbox.core.setCacheNameDetails({ prefix: "aaj-express" });
 

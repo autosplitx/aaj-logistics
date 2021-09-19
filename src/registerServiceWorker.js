@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 import { register } from "register-service-worker";
 
 if (process.env.NODE_ENV === "production") {
@@ -22,8 +21,11 @@ if (process.env.NODE_ENV === "production") {
     updatefound() {
       console.log("New content is downloading.");
     },
-    updated() {
+    updated(registration) {
       console.log("New content is available; please refresh.");
+      document.dispatchEvent(
+        new CustomEvent("swUpdated", { detail: registration })
+      );
     },
     offline() {
       console.log(

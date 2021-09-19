@@ -4,10 +4,16 @@
     <vue-progress-bar></vue-progress-bar>
     <router-view></router-view>
     <NotificationsList />
+
+    <div class="snackbar" :class="{ show: updateExists }">
+      <h6>Update is available...</h6>
+      <button class="btn btn-sm" @click="refreshApp">Update</button>
+    </div>
   </div>
 </template>
 
 <script>
+import update from "./mixins/update";
 import PageLoader from "./components/PageLoader.vue";
 import NotificationsList from "./components/NotificationsList.vue";
 
@@ -18,6 +24,8 @@ export default {
   data() {
     return {};
   },
+
+  mixins: [update],
 
   mounted() {
     this.$Progress.finish();
@@ -42,6 +50,85 @@ export default {
 </script>
 
 <style>
+.snackbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -148px;
+  background-color: rgba(218, 83, 44, 0.8);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1rem;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+.snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.snackbar h6 {
+  color: #fff;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.snackbar .btn {
+  background-color: rgba(218, 83, 44, 0.4);
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
 .view-enter-active,
 .view-leave-active {
   transition: opacity 0.5s ease-in-out, transform 0.5s ease;

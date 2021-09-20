@@ -938,7 +938,7 @@ samp {
   gap: 10px;
 }
 .request-wrap {
-margin-bottom: 5rem;
+  margin-bottom: 5rem;
   padding: 0 0.5rem;
   border-radius: 10px;
 }

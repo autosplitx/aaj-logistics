@@ -37,7 +37,7 @@
             v-for="(error, index) of v$.form.first_name.$errors"
             :key="index"
           >
-            <div class="error-msg">{{ error.$message }}</div>
+            <div class="error-msg-text">{{ error.$message }}</div>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
             v-for="(error, index) of v$.form.last_name.$errors"
             :key="index"
           >
-            <div class="error-msg">{{ error.$message }}</div>
+            <div class="error-msg-text">{{ error.$message }}</div>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
         v-for="(error, index) of v$.form.country.$errors"
         :key="index"
       >
-        <div class="error-msg">{{ error.$message }}</div>
+        <div class="error-msg-text">{{ error.$message }}</div>
       </div>
 
       <div class="user-box">
@@ -91,7 +91,7 @@
         v-for="(error, index) of v$.form.phone.$errors"
         :key="index"
       >
-        <div class="error-msg">{{ error.$message }}</div>
+        <div class="error-msg-text">{{ error.$message }}</div>
       </div>
 
       <div class="user-box">
@@ -107,7 +107,7 @@
           v-for="(error, index) of v$.form.email.$errors"
           :key="index"
         >
-          <div class="error-msg">{{ error.$message }}</div>
+          <div class="error-msg-text">{{ error.$message }}</div>
         </div>
       </div>
 
@@ -125,7 +125,7 @@
             v-for="(error, index) of v$.form.password.$errors"
             :key="index"
           >
-            <div class="error-msg">{{ error.$message }}</div>
+            <div class="error-msg-text">{{ error.$message }}</div>
           </div>
         </div>
 
@@ -141,7 +141,7 @@
             v-for="(error, index) of v$.form.confirm_password.$errors"
             :key="index"
           >
-            <div class="error-msg">{{ error.$message }}</div>
+            <div class="error-msg-text">{{ error.$message }}</div>
           </div>
         </div>
       </div>
@@ -398,7 +398,9 @@ export default {
 }
 
 .error-msg {
-  border-color: #dc3545;
+  border-color: #dc3545 !important;
+}
+.error-msg-text {
   color: #dc3545;
   font-size: 0.7rem;
 }

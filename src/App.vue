@@ -57,6 +57,7 @@ export default {
   visibility: hidden;
   min-width: 250px;
   margin-left: -148px;
+  margin-bottom: 3rem;
   background-color: rgba(218, 83, 44, 0.8);
   color: #fff;
   text-align: center;

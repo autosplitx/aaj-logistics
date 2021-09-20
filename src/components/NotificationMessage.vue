@@ -52,10 +52,10 @@ export default {
   bottom: 10px;
   right: 15px;
   width: 330px;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   padding: 1rem;
-  background-color: var(--aaj-primary-h10);
+  background-color: rgba(218, 83, 44, 0.8);
   border-radius: 20px;
 }
 .danger {

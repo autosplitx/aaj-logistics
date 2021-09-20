@@ -69,6 +69,7 @@ const routes = [
     name: "Registration",
     component: Registration,
     meta: {
+      // guestAuth: true,
       title: "Registration | AAJExpress",
       metaTags: [
         {
@@ -103,8 +104,20 @@ const routes = [
   {
     path: "/user",
     component: User,
+    async beforeEnter(to, from, next) {
+      try {
+        let hasPermission = await store.getters["auth/authenticated"];
+        if (hasPermission) {
+          next();
+        }
+      } catch (error) {
+        next({
+          name: "Registration",
+          query: { redirectFrom: to.fullPath },
+        });
+      }
+    },
     meta: {
-      adminAuth: true,
       title: "User - AAJExpress",
     },
     children: [
@@ -246,29 +259,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  function isLoggedIn() {
-    let authUser = store.getters["auth/authenticated"];
-    return authUser;
-  }
-  if (to.matched.some((record) => record.meta.adminAuth)) {
-    if (!isLoggedIn()) {
-      next({
-        path: "/registration",
-        query: { redirect: from.fullPath },
-      });
-    }
-    // else {
-    //   next();
-    // }
-  }
-  // else if (to.matched.some((record) => record.meta.guestAuth)) {
+  // function isLoggedIn() {
+  //   let authUser = store.getters["auth/authenticated"];
+  //   return authUser;
+  // }
+
+  // if (to.matched.some((record) => record.meta.requiresAuth)) {
+  //   if (!isLoggedIn()) {
+  //     next({
+  //       name: "Registration",
+  //       query: { redirect: from.fullPath },
+  //     });
+  //   }
+  // } else if (to.matched.some((record) => record.meta.guestAuth)) {
   //   if (isLoggedIn()) {
   //     next({
-  //       path: "/",
+  //       name: "Home",
   //       query: { redirect: to.fullPath },
   //     });
-  //   } else {
-  //     next();
   //   }
   // }
 

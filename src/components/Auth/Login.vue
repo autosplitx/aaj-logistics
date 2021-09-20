@@ -29,7 +29,7 @@
         v-for="(error, index) of v$.form.email.$errors"
         :key="index"
       >
-        <div class="error-msg">{{ error.$message }}</div>
+        <div class="error-msg-text">{{ error.$message }}</div>
       </div>
 
       <div class="user-box">
@@ -46,7 +46,7 @@
         v-for="(error, index) of v$.form.password.$errors"
         :key="index"
       >
-        <div class="error-msg">{{ error.$message }}</div>
+        <div class="error-msg-text">{{ error.$message }}</div>
       </div>
 
       <button type="submit" @click.prevent="loginForm">
@@ -203,6 +203,8 @@ export default {
 
 .error-msg {
   border-color: #dc3545 !important;
+}
+.error-msg-text {
   color: #dc3545;
   font-size: 0.7rem;
 }

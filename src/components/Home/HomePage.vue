@@ -2,7 +2,7 @@
   <div class="home-page">
     <Header />
 
-    <Hero />
+    <Hero :authenticated="authenticated" />
 
     <div class="wrapper">
       <Shipping />
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Header from "./Header.vue";
 import Hero from "./Hero.vue";
 import Shipping from "./Shipping.vue";
@@ -34,6 +35,7 @@ export default {
   props: {
     msg: String,
   },
+
   components: {
     Header,
     Hero,
@@ -43,6 +45,12 @@ export default {
     Ecommerce,
     Faq,
     Footer,
+  },
+
+  computed: {
+    ...mapGetters({
+      authenticated: "auth/authenticated",
+    }),
   },
 };
 </script>

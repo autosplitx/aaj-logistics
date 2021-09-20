@@ -10,7 +10,7 @@
           </h3>
         </div>
 
-        <div class="account">
+        <div class="account" v-if="!authenticated">
           <router-link :to="{ name: 'Registration' }" class="btn btn-prinary"
             >Create an account</router-link
           >
@@ -27,7 +27,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Hero",
+  props:['authenticated']
+};
 </script>
 
 <style scoped>

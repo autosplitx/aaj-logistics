@@ -113,6 +113,7 @@ export default {};
   position: relative;
   padding: 0.8rem 1.5rem;
   width: 95%;
+  font-size: 1rem;
   margin: auto;
   display: block;
   cursor: pointer;

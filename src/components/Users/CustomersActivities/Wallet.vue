@@ -238,7 +238,8 @@ export default {
   cursor: pointer;
 }
 .wallet-container {
-  height: 43vh;
+  /* height: 43vh; */
+  margin-bottom: 5rem;
   background-color: var(--aaj-primary-h1);
 }
 .balance {
@@ -316,9 +317,10 @@ export default {
   .grid.grid-3 h5 {
     font-size: 0.8rem;
   }
-  /* .wallet-container {
-    max-height: 100vh;
-  } */
+  .wallet-container {
+    /* max-height: 100vh; */
+    margin-bottom: 5rem;
+  }
 }
 @media (min-width: 375px) {
   /* smartphones, iPhone, portrait 480x320 phones */

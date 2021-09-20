@@ -7,9 +7,7 @@
         <router-link :to="{ name: 'user.dashboard' }">
           <img src="/img/aaj/user1.png" alt="Customer's Avatar" />
         </router-link>
-        <router-link :to="{ name: 'Home' }">
-          <i class="fa fa-home"></i>
-        </router-link>
+
         <!-- <template v-if="!openSidebar">
           <div class="toggle-bars" @click="toggleSidebar">
             <i class="fa fa-bars"></i>
@@ -22,8 +20,6 @@
           </div>
         </template> -->
         <div class="notification">
-          <i class="fa fa-bell"></i>
-          <!-- <div class="counter">2</div> -->
           <button @click.prevent="logout">
             <i class="fa fa-power-off logout"></i>
           </button>
@@ -32,16 +28,19 @@
     </div>
   </div>
 
+  <Footer :isAuth="authenticated" />
+
   <router-view></router-view>
 </template>
 
 <script>
+import Footer from "@/components/Users/Footer.vue";
 import { mapGetters, mapActions } from "vuex";
 // import Sidebar from "../components/Users/Sidebar.vue";
 
 export default {
   name: "User",
-  // components: { Sidebar },
+  components: { Footer },
 
   data() {
     return { openSidebar: false };
@@ -85,11 +84,6 @@ export default {
   align-items: center;
   margin: 0.8rem 0.5rem;
 }
-
-.notification {
-  position: relative;
-}
-
 .toggle-bars,
 .notification {
   color: var(--aaj-blue-h1);
@@ -139,22 +133,6 @@ export default {
   color: #fff;
   z-index: 15;
 }
-
-/* .counter {
-  display: inline-block;
-  position: fixed;
-  top: 5px;
-  right: 5px;
-  color: #fff;
-  background: var(--aaj-primary-h10);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.6rem;
-} */
 
 @media (min-width: 641px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */

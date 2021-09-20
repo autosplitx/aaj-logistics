@@ -21,7 +21,9 @@
                 <p>Bonuses</p>
               </div>
               <div class="">
-                <span>{{ new Intl.NumberFormat().format(wallet.balance) }}</span>
+                <span>{{
+                  new Intl.NumberFormat().format(wallet.balance)
+                }}</span>
                 <p>Deposit</p>
               </div>
             </div>
@@ -201,7 +203,7 @@ export default {
 .customer-content {
   padding: 0 1rem;
   margin-top: 5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 5rem;
 }
 .content-item {
   text-transform: uppercase;
@@ -297,6 +299,7 @@ export default {
   .customer-content {
     padding: 0 0.5rem;
     margin-top: 5.5rem;
+    margin-bottom: 6rem;
   }
   .content-item .card {
     min-height: 130px;

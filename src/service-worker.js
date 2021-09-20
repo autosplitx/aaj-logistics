@@ -1,6 +1,43 @@
-self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.setConfig({ debug: true });
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+const cacheName = "aajExpress-v1";
+const filesToCache = ["index.html"];
+
+self.addEventListener("install", function (event) {
+  // Perform install steps
+  console.log("[Servicework] Install");
+  event.waitUntil(
+    caches.open(cacheName).then(function (cache) {
+      console.log("[ServiceWorker] Caching app shell");
+      return cache.addAll(filesToCache);
+    })
+  );
+});
+
+self.addEventListener("activate", function (event) {
+  console.log("[Servicework] Activate");
+  event.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all(
+        keyList.map(function (key) {
+          if (key !== cacheName) {
+            console.log("[ServiceWorker] Removing old cache shell", key);
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  console.log("[ServiceWorker] Fetch");
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      return response || fetch(event.request);
+    })
+  );
+});
 
 let click_open_url;
 // Web push Notification //
@@ -20,6 +57,8 @@ self.addEventListener("push", function (event) {
   );
 });
 
+workbox.routing.registerNavigationRoute("/index.html");
+
 workbox.routing.registerRoute(
   new RegExp("https://fonts.(?:googleapis|gstatic).com/(.*)"),
   new workbox.strategies.CacheFirst({
@@ -29,8 +68,6 @@ workbox.routing.registerRoute(
     cacheableResponse: { statuses: [0, 200] },
   })
 );
-
-workbox.routing.registerNavigationRoute("/index.html");
 
 self.addEventListener("notificationclick", function (event) {
   const clickedNotification = event.showNotification;
@@ -45,7 +82,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js"
 );
 
-importScripts("/precache-manifest.db39ebce4b7bbe99c9ad0682b6936b81.js");
+importScripts("/precache-manifest.f080b18ec956046d14da28e9ae8b8dcd.js");
 
 workbox.core.setCacheNameDetails({ prefix: "aaj-express" });
 
@@ -54,3 +91,6 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
+
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

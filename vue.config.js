@@ -8,6 +8,6 @@ module.exports = {
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black",
     workboxPluginMode: "InjectManifest",
-    workboxOptions: { swSrc: "src/service-worker.js" },
+    workboxOptions: { swSrc: "src/service-worker.js", exclude: [/_redirects/] },
   },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createRouter, createWebHistory } from "vue-router";
 import store from "@/store";
 
@@ -109,6 +110,11 @@ const routes = [
         let hasPermission = await store.getters["auth/authenticated"];
         if (hasPermission) {
           next();
+        } else {
+          next({
+            name: "Registration",
+            query: { redirectFrom: to.fullPath },
+          });
         }
       } catch (error) {
         next({

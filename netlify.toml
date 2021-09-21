@@ -8,17 +8,17 @@
   to = "/index.html"
   status = 200
 
-[[redirects]]
-  from = "/service-worker.js"
-  to = "/static/service-worker.js"
-  status = 200
+# [[redirects]]
+#   from = "/service-worker.js"
+#   to = "/static/service-worker.js"
+#   status = 200
 
-[[redirects]]
-  from = "/workbox-07643d7a.js"
-  to = "/static/workbox-07643d7a.js"
-  status = 200
+# [[redirects]]
+#   from = "/workbox-07643d7a.js"
+#   to = "/static/workbox-07643d7a.js"
+#   status = 200
 
-[[redirects]]
-  from = "/manifest.json"
-  to = "/static/manifest.json"
-  status = 200
+# [[redirects]]
+#   from = "/manifest.json"
+#   to = "/static/manifest.json"
+#   status = 200

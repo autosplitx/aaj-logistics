@@ -28,6 +28,7 @@
               type="text"
               v-model.lazy="v$.form.first_name.$model"
               required="required"
+              :class="{ 'error-msg': v$.form.first_name.$error }"
             />
             <label for=""> First Name:</label>
           </div>
@@ -47,6 +48,7 @@
               type="text"
               v-model.lazy="v$.form.last_name.$model"
               required="required"
+              :class="{ 'error-msg': v$.form.last_name.$error }"
             />
             <label for="">Last Name:</label>
           </div>
@@ -65,6 +67,7 @@
           type="text"
           v-model.lazy="v$.form.country.$model"
           required="required"
+          :class="{ 'error-msg': v$.form.country.$error }"
         />
         <label for=""> Country:</label>
       </div>
@@ -82,6 +85,7 @@
           type="tel"
           v-model.lazy="v$.form.phone.$model"
           required="required"
+          :class="{ 'error-msg': v$.form.phone.$error }"
         />
         <label for=""> Phone number:</label>
       </div>
@@ -99,6 +103,7 @@
           type="email"
           v-model.lazy="v$.form.email.$model"
           required="required"
+          :class="{ 'error-msg': v$.form.email.$error }"
         />
         <label for=""> Email address</label>
         <div class="pre-icon os-icon os-icon-email-2-at2"></div>
@@ -117,6 +122,7 @@
             type="password"
             v-model.lazy="v$.form.password.$model"
             required="required"
+            :class="{ 'error-msg': v$.form.password.$error }"
           />
           <label for=""> Password</label>
           <div class="pre-icon os-icon os-icon-fingerprint"></div>
@@ -134,6 +140,7 @@
             type="password"
             v-model.lazy="v$.form.confirm_password.$model"
             required="required"
+            :class="{ 'error-msg': v$.form.confirm_password.$error }"
           />
           <label for="">Confirm Password</label>
           <div

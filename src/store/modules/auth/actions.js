@@ -102,21 +102,25 @@ export const updateUser = ({ commit, dispatch }, data) => {
       commit("SET_USER_ERROR", []);
       dispatch(
         "addNotification",
-        { type: "success", message: "User updated successfully 😊", count: 0 },
+        {
+          type: "success",
+          message: "Profile updated successfully 😊",
+          count: 0,
+        },
         { root: true }
       );
-      User.all().then((response) => {
-        commit("SET_USERS", response.data);
-      });
     })
     .catch((error) => {
       if (error.response.status == 422) {
-        commit("SET_USER_ERROR", error.response.data.errors);
-      }
-      if (error.response.status === 419) {
-        commit("SET_AUTHENTICATED", false);
-        commit("SET_AUTH_USER", null);
-        router.push({ name: "Login" });
+        dispatch(
+          "addNotification",
+          {
+            type: "danger",
+            message: `${error.response.data.errors} 😞`,
+            count: 0,
+          },
+          { root: true }
+        );
       }
     });
 };

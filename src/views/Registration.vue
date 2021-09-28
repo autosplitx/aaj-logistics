@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .logo {
-  background: var(--aaj-primary-h10);
+  background: var(--aaj-primary-h1);
   padding: 0.5rem;
 }
 .logo img {

@@ -28,10 +28,13 @@ const TopUpWallet = () =>
   import(
     /* webpackChunkName: "top-up-wallet" */ "@/components/Users/CustomersActivities/TopUpWallet.vue"
   );
-
 const ForgotPassword = () =>
   import(
     /* webpackChunkName: "forgot-password" */ "@/components/Auth/ForgotPassword.vue"
+  );
+const Profile = () =>
+  import(
+    /* webpackChunkName: "profile" */ "@/components/Users/Profile.vue"
   );
 
 const routes = [
@@ -221,6 +224,24 @@ const routes = [
             {
               property: "og:description",
               content: "The top up wallet's page of AAJExpress.",
+            },
+          ],
+        },
+      },
+      {
+        path: "profile",
+        name: "user.profile",
+        component: Profile,
+        meta: {
+          title: "Profile | AAJExpress",
+          metaTags: [
+            {
+              name: "description",
+              content: "The profile's page of AAJExpress.",
+            },
+            {
+              property: "og:description",
+              content: "The profile's page of AAJExpress.",
             },
           ],
         },

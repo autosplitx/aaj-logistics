@@ -2,23 +2,29 @@
   <footer>
     <div class="container">
       <div class="flex">
-        <router-link :to="{ name: 'Home' }">
+        <router-link :to="{ name: 'Home' }" exact>
           <i class="fa fa-home"></i>
+          <p>Home</p>
         </router-link>
         <template v-if="isAuth">
-          <router-link :to="{ name: 'user.dashboard' }">
+          <router-link :to="{ name: 'user.dashboard' }" exact>
             <i class="fa fa-tachometer-alt"></i>
+            <p>Dashboard</p>
           </router-link>
         </template>
         <template v-else>
-          <router-link :to="{ name: 'Registration' }">
+          <router-link :to="{ name: 'Registration' }" exact>
             <i class="fa fa-sign-in-alt"></i>
           </router-link>
         </template>
-        <div class="notification">
+        <router-link :to="{ name: 'user.profile' }" exact>
+          <i class="fa fa-user-alt"></i>
+          <p>Profile</p>
+        </router-link>
+        <!-- <div class="notification">
           <i class="fa fa-bell"></i>
           <div class="counter">3</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </footer>
@@ -44,7 +50,7 @@ footer {
 }
 
 footer .container {
-  padding: 1rem 3rem;
+  padding: 1rem;
 }
 
 footer .container .flex {
@@ -53,9 +59,17 @@ footer .container .flex {
   align-items: center;
 }
 
-.flex i {
-  color: var(--aaj-blue-h1);
+footer .container .flex p {
+  font-size: 0.7rem;
 }
+
+.router-link-exact-active {
+  color: var(--aaj-primary-h1);
+}
+
+/* .flex i {
+  color: var(--aaj-blue-h1);
+} */
 
 .notification {
   position: relative;

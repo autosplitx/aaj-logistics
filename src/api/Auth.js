@@ -16,7 +16,7 @@ export default {
   },
 
   update(data) {
-    return Api.put(`${END_POINT}/${data.id}`, data);
+    return Api.put(`${END_POINT}/register.php?uId=${data.id}`, data);
   },
 
   delete(uId) {

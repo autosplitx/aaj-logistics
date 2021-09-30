@@ -32,6 +32,9 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", (event) => {
   console.log("[ServiceWorker] Fetch");
+  if ( event.request.url.match( '^.*(\/web\/).*$' ) ) {
+    return false;
+  }
   event.respondWith(
     caches.match(event.request).then(function (response) {
       return response || fetch(event.request);

@@ -32,7 +32,7 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", (event) => {
   console.log("[ServiceWorker] Fetch");
-  if ( event.request.url.match( '^.*(\/web\/).*$' ) ) {
+  if (event.request.url.match("^.*(/web/).*$")) {
     return false;
   }
   event.respondWith(
@@ -60,7 +60,9 @@ self.addEventListener("push", function (event) {
   );
 });
 
-workbox.routing.registerNavigationRoute("/index.html");
+workbox.routing.registerNavigationRoute("/index.html", {
+  blacklist: [/^\/api/, /^\/web/],
+});
 
 workbox.routing.registerRoute(
   new RegExp("https://fonts.(?:googleapis|gstatic).com/(.*)"),

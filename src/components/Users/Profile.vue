@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h5>Welcome to Profile</h5>
+    <h5>Welcome to Profile Page</h5>
     <!-- <EditUser /> -->
-    {{ form }}
+    <!-- {{ form }} -->
   </div>
 </template>
 

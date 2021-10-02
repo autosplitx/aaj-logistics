@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { createRouter, createWebHistory } from "vue-router";
+import NProgress from "nprogress";
 import store from "@/store";
 
 const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
@@ -33,9 +34,7 @@ const ForgotPassword = () =>
     /* webpackChunkName: "forgot-password" */ "@/components/Auth/ForgotPassword.vue"
   );
 const Profile = () =>
-  import(
-    /* webpackChunkName: "profile" */ "@/components/Users/Profile.vue"
-  );
+  import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
 
 const routes = [
   {
@@ -286,27 +285,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // function isLoggedIn() {
-  //   let authUser = store.getters["auth/authenticated"];
-  //   return authUser;
-  // }
-
-  // if (to.matched.some((record) => record.meta.requiresAuth)) {
-  //   if (!isLoggedIn()) {
-  //     next({
-  //       name: "Registration",
-  //       query: { redirect: from.fullPath },
-  //     });
-  //   }
-  // } else if (to.matched.some((record) => record.meta.guestAuth)) {
-  //   if (isLoggedIn()) {
-  //     next({
-  //       name: "Home",
-  //       query: { redirect: to.fullPath },
-  //     });
-  //   }
-  // }
-
+  NProgress.start();
   /* ---------------------------------------------//? SEO Friendly META -------------------------------------------- */
 
   const nearestWithTitle = to.matched
@@ -358,6 +337,10 @@ router.beforeEach((to, from, next) => {
     .forEach((tag) => document.head.appendChild(tag));
 
   next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;

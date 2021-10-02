@@ -1,8 +1,8 @@
 <template>
-  <div
+  <!-- <div
     class="modal-backdrop fade"
     :class="{ show: open, 'd-none': !open }"
-  ></div>
+  ></div> -->
 
   <div :class="{ 'modal-open': open }">
     <div class="modal d-none" :class="{ show: open, 'd-block': open }">
@@ -13,7 +13,7 @@
         <div class="modal-body">
           <slot></slot>
         </div>
-        <div class="p-1 border-top flex justify-content-between">
+        <div class="p-125 border-top flex justify-content-between">
           <slot name="modalFooter"></slot>
         </div>
       </div>
@@ -31,5 +31,8 @@ export default {
 <style scoped>
 .d-block {
   display: block;
+}
+.p-125 {
+  padding: 0.6rem;
 }
 </style>

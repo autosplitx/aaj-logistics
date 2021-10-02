@@ -386,7 +386,7 @@ export default {
 
 <style scoped>
 .logo {
-  width: 60px;
+  width: 50px;
   display: block;
 }
 .modal h3 {

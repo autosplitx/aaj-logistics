@@ -7,11 +7,6 @@ import rate from "./modules/rate";
 import transaction from "./modules/transaction";
 import wallet from "./modules/wallet";
 
-// const state = {};
-// const actions = {};
-// const mutations = {};
-// const getters = {};
-
 import state from "./state";
 import * as getters from "./getters";
 import * as mutations from "./mutations";

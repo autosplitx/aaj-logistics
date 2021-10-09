@@ -153,8 +153,20 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+      wallet: "wallet/wallets",
+    }),
+
+    fullName: function () {
+      return this.user.first_name + " " + this.user.last_name;
+    },
+  },
+
   methods: {
     ...mapActions("location", ["getShipmentType"]),
+    ...mapActions("wallet", ["getWallet"]),
 
     shipmentType: function (params) {
       this.getShipmentType(params);
@@ -181,19 +193,12 @@ export default {
     },
   },
 
-  computed: {
-    ...mapGetters({
-      user: "auth/user",
-      wallet: "wallet/wallets",
-    }),
-
-    fullName: function () {
-      return this.user.first_name + " " + this.user.last_name;
-    },
-  },
-
   created() {
     setInterval(this.getDate, 1000);
+  },
+
+  mounted() {
+    this.getWallet(this.user.id);
   },
 };
 </script>

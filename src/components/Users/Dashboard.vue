@@ -1,11 +1,44 @@
 <template>
   <div class="customer">
+    <Modal :open="isOpen" class="import-export">
+      <template v-slot:modalHeader>
+        <img src="/img/aaj/logo.png" class="logo" />
+        <button type="button" class="close" @click="close">×</button>
+      </template>
+
+      <template v-slot:default>
+        <h3 class="text-center"></h3>
+        <div class="place grid">
+          <router-link
+            :to="{ name: 'user.transaction' }"
+            @click="shipmentType('import')"
+            class="border-radius centralized"
+            exact
+          >
+            IMPORT
+          </router-link>
+          <router-link
+            :to="{ name: 'user.transaction' }"
+            class="border-radius centralized"
+            @click="shipmentType('export')"
+            exact
+          >
+            EXPORT
+          </router-link>
+        </div>
+      </template>
+
+      <template v-slot:modalFooter>
+        <button type="button" class="btn bg-blue" @click="close">Close</button>
+      </template>
+    </Modal>
+
     <div class="customer-header">
       <div class="container">
         <div class="avatar">
           <div class="flex">
-            <h5>{{ greetings }}</h5>
-            <h4 v-if="user">{{ fullName }}</h4>
+            <h5 class="h5">{{ greetings }}</h5>
+            <h4 class="h4" v-if="user">{{ fullName }}</h4>
           </div>
         </div>
 
@@ -20,11 +53,13 @@
                 <span>250</span>
                 <p>Bonuses</p>
               </div>
-              <div class="">
-                <span>{{
-                  new Intl.NumberFormat().format(wallet.balance)
-                }}</span>
-                <p>Deposit</p>
+              <div>
+                <router-link :to="{ name: 'user.wallet' }" class="text-primary">
+                  <span>{{
+                    new Intl.NumberFormat().format(wallet.balance)
+                  }}</span>
+                  <p>Deposit</p>
+                </router-link>
               </div>
             </div>
           </div>
@@ -34,7 +69,7 @@
 
     <div class="customer-content container">
       <div class="grid grid-3 content-item">
-        <div class="card">
+        <div class="card d-none">
           <router-link :to="{ name: 'user.requestpayment' }" exact>
             <div class="card-img">
               <img src="/img/aaj/send.svg" alt="Request Payment" />
@@ -60,22 +95,22 @@
               <img src="/img/aaj/wallet.svg" alt="Fund Wallet" />
             </div>
             <div class="flex card-info">
-              <h5>fund wallet</h5>
+              <h5>Wallet</h5>
             </div>
           </router-link>
         </div>
 
         <div class="card">
-          <router-link :to="{ name: 'user.transaction' }" exact>
+          <div @click="opneModal">
             <div class="card-img">
               <img src="/img/aaj/request.svg" alt="Request Shipment" />
             </div>
             <div class="flex card-info">
-              <h5>Request shipment</h5>
+              <h5>Shipment type</h5>
             </div>
-          </router-link>
+          </div>
         </div>
-        <div class="card">
+        <div class="card d-none">
           <router-link :to="{ name: 'user.dashboard' }" exact>
             <div class="card-img">
               <img src="/img/aaj/track.svg" alt="Track Shipment" />
@@ -85,7 +120,7 @@
             </div>
           </router-link>
         </div>
-        <div class="card">
+        <div class="card d-none">
           <router-link :to="{ name: 'user.dashboard' }" exact>
             <div class="card-img">
               <img src="/img/aaj/invite.svg" alt="Invitation" />
@@ -101,20 +136,30 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
+import Modal from "@/components/ModalComp.vue";
 
 export default {
   name: "Dashboard",
+
+  components: { Modal },
 
   data() {
     return {
       greetings: "",
       foramtted: "",
+      isOpen: false,
     };
   },
 
   methods: {
+    ...mapActions("location", ["getShipmentType"]),
+
+    shipmentType: function (params) {
+      this.getShipmentType(params);
+    },
+
     getDate: function () {
       const todaysDate = new Date();
       this.foramtted = moment(todaysDate).format("MMM Do, YYYY. (h:mm a)");
@@ -126,6 +171,13 @@ export default {
       else if (hrs >= 12 && hrs <= 17) greet = "Good Afternoon";
       else if (hrs >= 17 && hrs <= 24) greet = "Good Evening";
       this.greetings = greet;
+    },
+
+    opneModal: function () {
+      this.isOpen = !this.isOpen;
+    },
+    close: function () {
+      this.isOpen = !this.isOpen;
     },
   },
 
@@ -147,6 +199,35 @@ export default {
 </script>
 
 <style scoped>
+.place.grid {
+  place-items: center;
+}
+.border-radius {
+  border-radius: 50% / 25%;
+  width: 100px;
+  height: 100px;
+  background-color: var(--aaj-primary-h1);
+}
+.centralized {
+  display: grid;
+  place-items: center;
+}
+.centralized {
+  color: aliceblue;
+}
+.logo {
+  width: 50px;
+  display: block;
+}
+.modal h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.modal h5 {
+  font-size: 1rem;
+  color: var(--aaj-blue-h1);
+}
 .avatar {
   display: flex;
   justify-content: space-between;
@@ -200,6 +281,9 @@ export default {
 .header-item p {
   color: var(--aaj-primary-h10);
 }
+.text-primary {
+  color: var(--aaj-primary-h1);
+}
 .customer-content {
   padding: 0 1rem;
   margin-top: 5rem;
@@ -216,8 +300,11 @@ export default {
   height: 50px;
 }
 .content-item .card h5 {
-  font-size: 0.8rem;
+  font-size: 0.8rem !important;
   font-weight: 700;
+}
+:where(.h5, .h4) {
+  font-size: 1rem !important;
 }
 .card-img img {
   width: 105px;
@@ -284,7 +371,7 @@ export default {
     position: relative;
     height: 20vh;
     background: var(--aaj-gray-darkest);
-    border-radius: 0 0 50% 50%;
+    border-radius: 0;
   }
   .header-item > div {
     padding: 0 5.5rem;
@@ -295,7 +382,9 @@ export default {
   .header-item p {
     font-size: 1.2rem;
   }
-
+  .avatar {
+    padding-left: 1rem;
+  }
   .customer-content {
     padding: 0 0.5rem;
     margin-top: 5.5rem;
@@ -320,13 +409,13 @@ export default {
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   .avatar {
-    padding: 2rem 2rem 0;
+    padding: 2rem 2rem 0 1rem;
   }
   .account .card {
     padding: 2rem 0;
   }
   .customer-header {
-    height: 20vh;
+    height: 40vh;
   }
 }
 
@@ -348,10 +437,33 @@ export default {
   }
   .fund {
     margin-right: 0 !important;
+    color: var(aaj-primary-h1) !important;
   }
 }
 
-@media (min-width: 1281px) {
+@media (min-width: 1280px) {
   /* hi-res laptops and desktops */
+  .customer-header {
+    height: 30vh;
+  }
+  .fund {
+    margin-right: 1.5rem !important;
+  }
+  .content-item .card h5 {
+    font-size: 1rem !important;
+  }
+  .avatar {
+    padding-left: 0;
+  }
+  :where(.h5, .h4) {
+    font-size: 1.25rem !important;
+  }
+  .account {
+    top: 50%;
+  }
+
+  .customer-content {
+    margin-top: 8rem;
+  }
 }
 </style>

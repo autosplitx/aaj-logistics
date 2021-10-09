@@ -28,9 +28,9 @@
     </div>
   </div>
 
-  <Footer :isAuth="authenticated" />
-
   <router-view></router-view>
+
+  <Footer :isAuth="authenticated" />
 </template>
 
 <script>

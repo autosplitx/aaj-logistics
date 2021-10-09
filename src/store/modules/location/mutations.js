@@ -17,3 +17,7 @@ export const SET_DEST_STATE = (state, states) => {
 export const SET_DEST_CITY = (state, cities) => {
   state.destCities = cities;
 };
+
+export const SET_SHIPMENT = (state, shipment) => {
+  state.shipment = shipment;
+};

@@ -30,9 +30,21 @@
               <div>
                 <div class="user-box">
                   <select
-                    v-model.trim.lazy="v$.form.serviceType.$model"
-                    required="required"
-                    :class="{ 'error-msg': v$.form.serviceType.$error }"
+                    v-model.trim.lazy="form.shipment"
+                    @change="shipments()"
+                  >
+                    <option value="" disabled selected>-shipment type-</option>
+                    <option value="1">Import</option>
+                    <option value="2">Export</option>
+                  </select>
+                </div>
+              </div>
+
+              <div v-if="form.shipment == 2">
+                <div class="user-box">
+                  <select
+                    v-model.trim.lazy="form.serviceType"
+                    :class="{ 'error-msg': form.serviceType }"
                   >
                     <option value="" disabled selected>
                       -select service type-
@@ -44,20 +56,10 @@
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
                 <div
                   class="input-errors"
-                  v-for="(error, index) of v$.form.serviceType.$errors"
+                  v-for="(error, index) of form.serviceType"
                   :key="index"
                 >
                   <div class="error-msg-text">{{ error.$message }}</div>
-                </div>
-              </div>
-
-              <div>
-                <div class="user-box">
-                  <select v-model.trim.lazy="form.priority">
-                    <option value="" disabled selected>-priority-</option>
-                    <option value="1">Standard</option>
-                    <option value="2">Urgent</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -74,12 +76,8 @@
                     @change="getCountryId('origin')"
                   >
                     <option value="" disabled selected>-select country-</option>
-                    <option
-                      :value="country.id"
-                      v-for="country in countries.data"
-                      :key="country.id"
-                    >
-                      {{ country.name }}
+                    <option :value="`${shipmentType.origin.id}`">
+                      {{ shipmentType.origin.name }}
                     </option>
                   </select>
                 </div>
@@ -174,13 +172,20 @@
                   @change="getCountryId('dest')"
                 >
                   <option value="" disabled selected>-select country-</option>
-                  <option
-                    :value="`${country.id}`"
-                    v-for="country in countries.data"
-                    :key="country.id"
-                  >
-                    {{ country.name }}
-                  </option>
+                  <template v-if="shipmentType.origin.id == 233">
+                    <option :value="`${shipmentType.destination.id}`">
+                      {{ shipmentType.destination.name }}
+                    </option>
+                  </template>
+                  <template v-else>
+                    <option
+                      :value="`${country.id}`"
+                      v-for="country in countries.data"
+                      :key="country.id"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </template>
                 </select>
               </div>
               <div class="pre-icon os-icon os-icon-user-male-circle"></div>
@@ -272,7 +277,7 @@ export default {
 
       form: {
         inter: "inter",
-        priority: "",
+        shipment: "",
         serviceType: "",
         originatingCountry: "",
         originatingState: "",
@@ -300,13 +305,24 @@ export default {
       "destCountries",
       "destStates",
       "destCities",
+      "shipmentType",
     ]),
     ...mapGetters("rate", ["rate"]),
   },
 
   methods: {
-    ...mapActions("location", ["getCountries", "getStates", "getCities"]),
+    ...mapActions("location", [
+      "getCountries",
+      "getStates",
+      "getCities",
+      "getShipmentType",
+    ]),
     ...mapActions("rate", ["getRate"]),
+
+    shipments: function () {
+      const sType = this.form.shipment == 1 ? "import" : "export";
+      this.getShipmentType(sType);
+    },
 
     rateForm() {
       this.v$.$validate();
@@ -357,12 +373,6 @@ export default {
   validations() {
     return {
       form: {
-        serviceType: {
-          required: helpers.withMessage(
-            "Service type may not be empty",
-            required
-          ),
-        },
         originatingCountry: {
           required: helpers.withMessage("Country may not be empty", required),
         },
@@ -528,7 +538,7 @@ select {
   .request-wrap {
     display: block;
     width: 80%;
-    margin: 3rem auto;
+    margin: 2rem auto 8rem;
   }
 
   .origin,

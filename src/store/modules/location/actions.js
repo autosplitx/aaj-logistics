@@ -8,6 +8,14 @@ export const getCountries = ({ commit }) => {
     .catch((error) => console.log(error));
 };
 
+export const getShipmentType = ({ commit }, params) => {
+  Location.getShipment(params)
+    .then((response) => {
+      commit("SET_SHIPMENT", response.data.data);
+    })
+    .catch((error) => console.log(error));
+};
+
 export const getStates = ({ commit }, params) => {
   let countryId = params[0];
   Location.getState(countryId)

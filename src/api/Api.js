@@ -3,6 +3,7 @@ import NProgress from "nprogress";
 
 const Api = axios.create({
   baseURL: "https://www.aajexpress.org/web/public/api",
+  // baseURL: "http://localhost/web_app/public/api",
   withCredentials: false,
   headers: {
     Accept: "application/json",

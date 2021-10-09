@@ -47,7 +47,7 @@ let click_open_url;
 self.addEventListener("push", function (event) {
   let push_message = event.data.text();
 
-  click_open_url = "https://vuemeetup.com";
+  click_open_url = "https://aajexpress.org";
   const options = {
     body: push_message.body,
     icon: "./img/aaj/logo.png",

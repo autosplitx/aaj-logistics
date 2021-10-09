@@ -2,7 +2,7 @@
   <footer>
     <div class="container">
       <div class="flex">
-        <router-link :to="{ name: 'Home' }" exact>
+        <router-link :to="{ name: 'Home' }" exact class="d-none">
           <i class="fa fa-home"></i>
           <p>Home</p>
         </router-link>

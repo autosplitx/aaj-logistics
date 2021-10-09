@@ -64,11 +64,11 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0.8rem;
+  /* margin: 1rem 0.8rem; */
 }
 .logo img {
   display: block;
-  width: 80px;
+  width: 70px;
 }
 .login .login-anchor {
   display: block;
@@ -127,9 +127,9 @@ export default {
   /* .top-head {
     padding: 0.5rem 0.8rem;
   } */
-  .logo img {
+  /* .logo img {
     width: 100px;
-  }
+  } */
   .login a {
     padding: 0.5rem 0.8rem;
     font-size: 1rem;
@@ -143,9 +143,9 @@ export default {
   /* .top-head {
     padding: 0.8rem 0;
   } */
-  .logo img {
+  /* .logo img {
     width: 100px;
-  }
+  } */
   .login a {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;

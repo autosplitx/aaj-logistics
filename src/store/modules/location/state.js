@@ -5,4 +5,6 @@ export default {
 
   destStates: {},
   destCities: {},
+
+  shipment: null,
 };

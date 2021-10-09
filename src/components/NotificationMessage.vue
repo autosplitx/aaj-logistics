@@ -57,6 +57,7 @@ export default {
   padding: 1rem;
   background-color: rgba(218, 83, 44, 0.8);
   border-radius: 20px;
+  z-index: 999;
 }
 .danger {
   color: var(--aaj-primary-h1);

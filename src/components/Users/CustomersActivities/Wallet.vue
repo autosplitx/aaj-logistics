@@ -368,7 +368,8 @@ export default {
   }
   .wallet-wrap {
     width: 100%;
-    padding: 3rem 1.5rem 1.5rem;
+    height: 60vh;
+    padding: 1rem 1.5rem 1.5rem;
   }
   .wallets .card {
     margin: 1.5rem 0 0;

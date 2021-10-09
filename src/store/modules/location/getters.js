@@ -17,3 +17,7 @@ export const destStates = (state) => {
 export const destCities = (state) => {
   return state.destCities;
 };
+
+export const shipmentType = (state) => {
+  return state.shipment;
+};

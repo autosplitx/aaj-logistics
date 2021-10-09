@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <div class="loader" v-if="loading"></div>
-
     <PageLoader />
     <router-view></router-view>
     <NotificationsList />

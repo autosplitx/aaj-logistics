@@ -1,5 +1,5 @@
 <template>
-  <div class="shipping text-center">
+  <div class="container shipping text-center">
     <div class="my-5">
       <h4>Shipping</h4>
       <h2 class="py-1">

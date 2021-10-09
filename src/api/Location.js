@@ -14,4 +14,8 @@ export default {
   getCity(stateId) {
     return Api.get(`${END_POINT}/city.php?state_id=${stateId}`);
   },
+
+  getShipment(shipmentType) {
+    return Api.get(`${END_POINT}/country.php?shipment_type=${shipmentType}`);
+  },
 };

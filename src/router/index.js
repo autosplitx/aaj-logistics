@@ -159,6 +159,7 @@ const routes = [
         path: "transaction",
         name: "user.transaction",
         component: Transaction,
+        props: true,
         meta: {
           title: "Transaction | AAJExpress",
           metaTags: [

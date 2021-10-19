@@ -488,15 +488,15 @@
 
             <div v-if="rate != null">
               <div class="quote-header card">
-                <h4>
+                <h6>
                   {{ rate.originCountry[0] }} ({{ rate.originCountry[1] }}) |
                   {{ rate.originState[0] }} ({{ rate.originState[1] }})
-                </h4>
+                </h6>
                 <span class="mx-3">to</span>
-                <h4>
+                <h6>
                   {{ rate.destCountry[0] }} ({{ rate.destCountry[1] }}) |
                   {{ rate.destState[0] }} ({{ rate.destState[1] }})
-                </h4>
+                </h6>
               </div>
 
               <div class="card">
@@ -667,7 +667,6 @@
 </template>
 
 <script>
-// import RequestShipment from "../components/Users/CustomersActivities/RequestShipment.vue";
 import { mapGetters, mapActions } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
@@ -681,6 +680,7 @@ export default {
 
       step: 1,
       form: {
+        shipment: "",
         senderName: "",
         senderPhone: "",
         senderEmail: "",
@@ -793,6 +793,8 @@ export default {
       if (req == "requestRate") {
         let reqRate = {
           inter: "inter",
+          shipment:
+            this.shipmentType.origin.iso3 == "USA" ? "import" : "export",
           originatingCountry: this.form.originatingCountry,
           destinationCountry: this.form.destinationCountry,
           originatingState: this.form.originatingState,

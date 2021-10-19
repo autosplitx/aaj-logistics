@@ -11,7 +11,7 @@
         <div class="place grid">
           <router-link
             :to="{ name: 'user.transaction' }"
-            @click="shipmentType('import')"
+            @click.prevent="shipmentType('import')"
             class="border-radius centralized"
             exact
           >
@@ -20,7 +20,7 @@
           <router-link
             :to="{ name: 'user.transaction' }"
             class="border-radius centralized"
-            @click="shipmentType('export')"
+            @click.prevent="shipmentType('export')"
             exact
           >
             EXPORT
@@ -69,16 +69,6 @@
 
     <div class="customer-content container">
       <div class="grid grid-3 content-item">
-        <div class="card d-none">
-          <router-link :to="{ name: 'user.requestpayment' }" exact>
-            <div class="card-img">
-              <img src="/img/aaj/send.svg" alt="Request Payment" />
-            </div>
-            <div class="flex card-info">
-              <h5>Send or request payment</h5>
-            </div>
-          </router-link>
-        </div>
         <div class="card">
           <router-link :to="{ name: 'user.rate' }" exact>
             <div class="card-img">
@@ -109,26 +99,6 @@
               <h5>Shipment type</h5>
             </div>
           </div>
-        </div>
-        <div class="card d-none">
-          <router-link :to="{ name: 'user.dashboard' }" exact>
-            <div class="card-img">
-              <img src="/img/aaj/track.svg" alt="Track Shipment" />
-            </div>
-            <div class="flex card-info">
-              <h5>Track shipment</h5>
-            </div>
-          </router-link>
-        </div>
-        <div class="card d-none">
-          <router-link :to="{ name: 'user.dashboard' }" exact>
-            <div class="card-img">
-              <img src="/img/aaj/invite.svg" alt="Invitation" />
-            </div>
-            <div class="flex card-info">
-              <h5>Invite &amp; earn</h5>
-            </div>
-          </router-link>
         </div>
       </div>
     </div>

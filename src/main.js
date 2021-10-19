@@ -32,7 +32,7 @@ import "vue-step-wizard/dist/vue-step-wizard.css";
 
 createApp(App)
   .use(store)
-  .use(NProgress)
   .use(router)
+  .use(NProgress)
   .use(VueStepWizard)
   .mount("#app");

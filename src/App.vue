@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <div class="loader" v-if="loading"></div>
     <PageLoader />
     <router-view></router-view>
     <NotificationsList />
@@ -14,20 +13,16 @@
 
 <script>
 import update from "./mixins/update";
-import PageLoader from "./components/PageLoader.vue";
-import NotificationsList from "./components/NotificationsList.vue";
+import PageLoader from "@/components/PageLoader.vue";
+import NotificationsList from "@/components/NotificationsList.vue";
 
 export default {
   name: "App",
   components: { PageLoader, NotificationsList },
 
   data() {
-    return {
-      loading: false,
-    };
+    return {};
   },
-
-  methods: {},
 
   mixins: [update],
 };
@@ -36,20 +31,6 @@ export default {
 <style>
 .app {
   position: relative;
-}
-
-.loader {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100%;
-  height: 100%;
-  /* background-color: hsla(13, 70%, 70%, 0.5); */
-  background-image: url("./assets/loading.gif");
-  background-size: 20%;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 10000000;
 }
 
 #nprogress .bar {
@@ -170,11 +151,5 @@ export default {
 .view-leave-to {
   opacity: 0;
   transform: translateY(100px);
-}
-
-@media screen and (min-width: 641px) {
-  .loader {
-    background-size: 6%;
-  }
 }
 </style>

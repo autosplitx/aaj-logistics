@@ -4,35 +4,42 @@ import NProgress from "nprogress";
 import store from "@/store";
 
 const Home = () => import(/* webpackChunkName: "home" */ "@/views/Home.vue");
+
 const Registration = () =>
   import(/* webpackChunkName: "registration" */ "@/views/Registration.vue");
-const Transaction = () =>
-  import(/* webpackChunkName: "transaction" */ "@/views/Transaction");
+
 const User = () => import(/* webpackChunkName: "user" */ "@/views/User.vue");
+
 const Dashboard = () =>
   import(
     /* webpackChunkName: "dashboard" */ "@/components/Users/Dashboard.vue"
   );
-const RequestPayment = () =>
+
+const Transaction = () =>
   import(
-    /* webpackChunkName: "request-payment" */ "@/components/Users/CustomersActivities/RequestPayment.vue"
+    /* webpackChunkName: "transaction" */ "@/components/Users/CustomersActivities/Transaction.vue"
   );
+
 const Rate = () =>
   import(
     /* webpackChunkName: "rate" */ "@/components/Users/CustomersActivities/Rate.vue"
   );
+
 const Wallet = () =>
   import(
     /* webpackChunkName: "wallet" */ "@/components/Users/CustomersActivities/Wallet.vue"
   );
+
 const TopUpWallet = () =>
   import(
     /* webpackChunkName: "top-up-wallet" */ "@/components/Users/CustomersActivities/TopUpWallet.vue"
   );
+
 const ForgotPassword = () =>
   import(
     /* webpackChunkName: "forgot-password" */ "@/components/Auth/ForgotPassword.vue"
   );
+
 const Profile = () =>
   import(/* webpackChunkName: "profile" */ "@/components/Users/Profile.vue");
 
@@ -138,28 +145,10 @@ const routes = [
         },
       },
       {
-        path: "requestpayment",
-        name: "user.requestpayment",
-        component: RequestPayment,
-        meta: {
-          title: "Request Payment | AAJExpress",
-          metaTags: [
-            {
-              name: "description",
-              content: "The request payment's page of AAJExpress.",
-            },
-            {
-              property: "og:description",
-              content: "The request payment's page of AAJExpress.",
-            },
-          ],
-        },
-      },
-      {
         path: "transaction",
         name: "user.transaction",
         component: Transaction,
-        props: true,
+        // props: true,
         meta: {
           title: "Transaction | AAJExpress",
           metaTags: [

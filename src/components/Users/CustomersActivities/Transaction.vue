@@ -396,18 +396,10 @@
                             type="radio"
                             name="priority"
                             value="1"
-                            v-model.trim.lazy="v$.form.priority.$model"
-                            required="required"
+                            v-model.trim.lazy="form.priority"
                           />
                           Standard
                         </label>
-                        <div
-                          class="input-errors"
-                          v-for="(error, index) of v$.form.priority.$errors"
-                          :key="index"
-                        >
-                          <div class="error-msg-text">{{ error.$message }}</div>
-                        </div>
                       </div>
 
                       <div class="user-radio">
@@ -416,18 +408,10 @@
                             type="radio"
                             name="priority"
                             value="2"
-                            v-model.trim.lazy="v$.form.priority.$model"
-                            required="required"
+                            v-model.trim.lazy="form.priority"
                           />
                           Urgent
                         </label>
-                        <div
-                          class="input-errors"
-                          v-for="(error, index) of v$.form.priority.$errors"
-                          :key="index"
-                        >
-                          <div class="error-msg-text">{{ error.$message }}</div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -588,21 +572,13 @@
                     type="radio"
                     name="service-type"
                     value="1"
-                    v-model.trim.lazy="v$.form.serviceType.$model"
-                    required="required"
+                    v-model.trim.lazy="form.serviceType"
                   />
                   Drop-off
                 </label>
                 <p>
                   The shipper will drop off the item at one of our locations
                 </p>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.serviceType.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg-text">{{ error.$message }}</div>
-                </div>
               </div>
 
               <div class="user-radio">
@@ -611,21 +587,13 @@
                     type="radio"
                     name="service-type"
                     value="2"
-                    v-model.trim.lazy="v$.form.serviceType.$model"
-                    required="required"
+                    v-model.trim.lazy="form.serviceType"
                   />
                   Pickup
                 </label>
                 <p>
                   This item should be picked up by a courier from the origin
                 </p>
-                <div
-                  class="input-errors"
-                  v-for="(error, index) of v$.form.serviceType.$errors"
-                  :key="index"
-                >
-                  <div class="error-msg-text">{{ error.$message }}</div>
-                </div>
               </div>
             </div>
 
@@ -905,12 +873,6 @@ export default {
           ),
         },
 
-        priority: {
-          required: helpers.withMessage("Priority field is required", required),
-        },
-        serviceType: {
-          required: helpers.withMessage("Drop-off field is required", required),
-        },
         policy: {
           required: helpers.withMessage("Policy field is required", required),
         },
